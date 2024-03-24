@@ -1,0 +1,32 @@
+1. Instalar las dependencias necesarias para este proyecto
+pip install Flask
+pip install psycopg2
+pip install python-dotenv
+pip install python-decouple
+
+2. Tener la Base de datos creada y actualizada
+    -Nombre de la Base de datos: SEV-Technology
+    -Actualizar Base de datos: 
+        Pasos para Actualizar la base de datos:
+            -Entrar a pgAdmin4
+            -Tener la Base de datos ya creada
+            -Click derecho encima de la Base de datos (SEV-Technology)
+            -Click en la opcion "Restore..."
+            -Donde dice "Filename" Seleccionar el archivo "SEV-Technology.sql" que se encuentra en la carperta "db" de este proyecto
+            -En la opcion "Query options" seleccionar "clean before restore"
+
+3. Crear un archivo .env en la raiz del proyecto, adentro de esta con van a contener los siguientes datos en base a tu perfil de postgress
+    
+    -dbname=SEV-Technology (El nombre de la base de datos, se espera que sea el mismo para todas)
+    -user=postgres (Su usuario de postgres)
+    -password=1227 (Su contraseña)
+    -host=localhost (El host donde se encuentra alojada la base de datos, esta no s uele cambiar)
+    -port=5432 (El puerto donde esta abierta la base de datos, esta no suele cambiar)
+
+4. Crear una rama en git con su nombre "git branch <nombre>" (Crear rama) "git checkout <nombre>" (Cambiarse de rama)
+
+5. Estar siempre al corriente de la rama principal con git pull
+
+
+
+

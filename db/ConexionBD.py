@@ -1,20 +1,24 @@
 import psycopg2
 from psycopg2 import OperationalError
-
-
+from decouple import config
 
 class ConexionBD:
     def __init__(self) -> None:
         pass
     
     def conectarBD(self):
+        dbname=config('dbname')
+        user=config('user')
+        password=config('password')
+        host=config('host')
+        port=config('port')
         try:
             self.conexion = psycopg2.connect(
-                    dbname="SEV-Technology",
-                    user="postgres",
-                    password="1227",
-                    host="localhost",  # O la dirección de tu servidor PostgreSQL
-                    port="5432"        # El puerto por defecto es 5432
+                    dbname=dbname,
+                    user=user,
+                    password=password,
+                    host=host,  # O la dirección de tu servidor PostgreSQL
+                    port=port        # El puerto por defecto es 5432
                 )
             print("Conexion a la base de datos exitosa")
             self.cursor = self.conexion.cursor()    
@@ -96,6 +100,13 @@ class ConexionBD:
 # conexion.update(query_update, params_update)
 
 # Ejemplo de SELECT
+
+# conexion = ConexionBD()
+# query_select = "SELECT * FROM usuarios"
+# resultados = conexion.select(query_select)
+# if(resultados):
+#     datos_json = json.dumps(resultados)
+#     print(datos_json) 
 
 
 
