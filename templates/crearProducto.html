@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/css/crearProducto.css">
+</head>
+
+<body>
+    <main class="main">
+        <div class="contenedor_principal">
+
+            <div class="contenedor_selectores">
+                <div class="contenedor_crear_producto activo">
+                    <span class="contendor_crear_producto_span">Crear Producto</span>
+                </div>
+            </div>
+
+            <form class="contenedor_formulario contenedor_formulario_crearProducto" id="crearProducto" action="/registroProducto" method="POST">
+
+                <div class="contenedor_nombre_producto contenedor_formulario_bloque">
+                    <label for="nombre">
+                        Nombre
+                    </label>
+                    <input class="contenedor_nombre_producto_input contenedor_formulario_input"  type="text" id="nombre" name="nombre" required placeholder="Nombre del Producto">
+                </div>
+
+                <div class="contenedor_marca_producto contenedor_formulario_bloque">
+                    <label for="marca">
+                        Marca
+                    </label>
+                    <input class="contenedor_marca_producto_input contenedor_formulario_input" type="text" id="marca" name="marca" required placeholder="Marca del producto"> 
+                </div>
+
+                <div class="contenedor_precio_producto contenedor_formulario_bloque">
+                    <label for="precio">
+                        Precio
+                    </label>
+                    <input class="contenedor_precio_producto_input contenedor_formulario_input" type="text" id="precio" name="precio" required placeholder="Precio del producto">
+                </div>
+
+                <div class="contenedor_cantidad_producto contenedor_formulario_bloque">
+                    <label for="cantidad">
+                        Cantidad
+                    </label>
+                    <input class="contenedor_cantidad_producto_input contenedor_formulario_input" type="text" id="cantidad" name="cantidad" required placeholder="Cantidad de producto">
+                </div>
+
+                <div class="contenedor_categoria_producto contenedor_formulario_bloque">
+                    <label for="categoria">
+                        Categoria
+                    </label>
+                        <input class="contenedor_categoria_producto_input contenedor_formulario_input" type="text" id="categoria" name="categoria" required placeholder="Categoria del producto">
+                </div>
+
+                <div class="contenedor_descripcion_producto contenedor_formulario_bloque">
+                        <label for="descripcion">
+                            Descripcion
+                        </label>
+                        <input class="contenedor_descripcion_producto_input contenedor_formulario_input" type="text" id="descripcion" name="descripcion" required placeholder="Descripcion del producto">
+                </div>
+
+                <div class="contenedor_id_usuario contenedor_formulario_bloque">
+                        <label for="idUsuario">
+                            Id Usuario
+                        </label>
+                        <input class="contenedor_id_usuario_input contenedor_formulario_input" type="text" id="idUsuario" name="idUsuario" required placeholder="Identificacion del usuario">
+                </div>
+
+                <p id="error" style="color: red;"></p>
+
+                <div class="contenedor_botones">
+                    <button type="submit" class="contenedor_botones_input">Crear Producto</button>
+                </div>
+            
+            </form>
+
+        </div>
+    </main>
+    <script>
+        // document.getElementById('loginForm').addEventListener('submit', function(event) {
+        //     var id = document.getElementById('id').value;
+        //     var contrasena = document.getElementById('contrasena').value;
+        //     var errorElement = document.getElementById('error');
+        //     if (!id || !contrasena) {
+        //         errorElement.textContent = 'Por favor, ingresa un nombre de usuario y una contraseña.';
+        //         event.preventDefault(); // Evitar el envío del formulario
+        //     } else {
+        //         // Puedes agregar más validaciones aquí si es necesario
+        //         // Por ejemplo, longitud mínima de la contraseña, caracteres especiales, etc.
+        //         errorElement.textContent = ''; // Limpiar el mensaje de error
+        //     }
+        // });
+
+        // document.getElementById('registroForm').addEventListener('submit', function(event) {
+        //     var id = document.getElementById('id').value;
+        //     var nombre = document.getElementById('nombre').value;
+        //     var apellido = document.getElementById('apellido').value;
+        //     var correo = document.getElementById('correo').value;
+        //     var contrasena = document.getElementById('contrasena').value;
+        //     var errorElement = document.getElementById('error');
+        //     // Verificar que todos los campos estén llenos
+        //     if (!id || !nombre || !apellido || !correo || !contrasena) {
+        //         errorElement.textContent = 'Por favor, llena todos los campos.';
+        //         event.preventDefault(); // Evitar el envío del formulario
+        //     } else {
+        //         errorElement.textContent = ''; // Limpiar el mensaje de error
+        //     }
+        // });
+    </script>
+    <script src="{{ url_for('static', filename='js/formulario/selector.js') }}"></script>
+</body>
+
+</html>
