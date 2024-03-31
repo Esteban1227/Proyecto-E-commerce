@@ -45,6 +45,34 @@ def login():
             return render_template('formulario.html', error=error)
     return render_template('formulario.html')
 
+
+@app.route('/registroProducto', methods=['GET', 'POST'])
+def registroProducto():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        marca = request.form['marca']
+        precio = request.form['precio']
+        cantidad = request.form['cantidad']
+        categoria = request.form['categoria']
+        descripcion = request.form['descripcion']
+        idUsuario = request.form['idUsuario']
+        # Verificar si el usuario ya existe
+        conexion = ConexionBD()
+        query_select = f"SELECT * FROM usuarios WHERE id = '{idUsuario}'"
+        resultados = conexion.select(query_select)
+        if resultados:
+            # Crear el nuevo producto
+            conexion = ConexionBD()
+            conexion.insert("INSERT INTO public.producto(nombre, marca, precio, categoria, descripcion, id_usuario, cantidad) VALUES (%s, %s,%s, %s,%s,%s,%s);",(nombre, marca, precio, categoria, descripcion, idUsuario, cantidad))
+            # Redireccionar al usuario a la página de inicio 
+            return redirect(url_for('inicio'))
+        else:
+            error = 'El nombre de usuario ya está en uso. Por favor, elige otro.'
+            return render_template('crearProducto.html', error=error)     
+    return render_template('crearProducto.html')
+
+
+
 @app.route('/')
 def inicio():
     if 'id' in session:
@@ -55,3 +83,5 @@ def inicio():
 if __name__ == '__main__':
     app.secret_key = 'super_secret_key'
     app.run(debug=True)
+
+
