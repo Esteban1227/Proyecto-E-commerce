@@ -63,7 +63,7 @@ def registroProducto():
         if resultados:
             # Crear el nuevo producto
             conexion = ConexionBD()
-            conexion.insert("INSERT INTO public.producto(nombre, marca, precio, categoria, descripcion, id_usuario, cantidad) VALUES (%s, %s,%s, %s,%s,%s,%s);",(nombre, marca, precio, categoria, descripcion, idUsuario, cantidad))
+            conexion.insert("INSERT INTO public.producto(nombre, marca, precio, categoria, descripcion, id_usuario, cantidad, img_producto) VALUES (%s, %s,%s, %s,%s,%s,%s,%s);",(nombre, marca, precio, categoria, descripcion, idUsuario, cantidad))
             # Redireccionar al usuario a la página de inicio 
             return redirect(url_for('inicio'))
         else:
