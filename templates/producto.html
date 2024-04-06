@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Aplicación Web</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/productoPequeño.css') }}">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/productoGrande.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
 </head>
 <body>
@@ -36,35 +35,17 @@
                 <img src="../static/assets/btnMenuCarrito.svg" alt="">
            </div> 
         </div>
-        <div id="header_carrito" class="header_carrito inactivo">
-            <div class="header_carrito_top">
-                <div class="header_carrito_top_miCarrito">
-                    <img src="../static/assets/iconCarrito.png" alt="">
-                    <h3>Mi Carrito</h3>
-                </div>
-                <div class="header_carrito_top_borrarCarrito">
-                    <img src="../static/assets/btnBorrarCarrito.svg" alt="">
-                </div>
-            </div>
-            <div class="header_carrito_productos">
-                <span>No tienes productos en tu carrito</span>
-                <img src="../static/assets/iconNoProductos.svg" alt="">
-            </div>
-            <div class="header_carrito_botonIrCarrito">
-                <span>Ir a mi carrito</span>
-            </div>
-        </div>
     </header>
-    <main>
-        <h1>Pagina Principal</h1>
-        <div id="contedor_productos"></div>
+    <main class="main">
+        <div class="contenedor_pricipal">
+            
+        </div>
     </main>
     <script>
         window.rutaStatic = '{{ url_for("static", filename="") }}';
         window.rutaStaticUpload = '{{ url_for("static", filename="upload/") }}';
         window.rutaStaticAssets = '{{ url_for("static", filename="assets/") }}';
     </script>
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/carrito.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/producto.js') }}"></script>
 </body>
 </html>

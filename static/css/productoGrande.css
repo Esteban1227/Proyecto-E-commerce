@@ -22,7 +22,7 @@
     width: 500px;
     height: 500px;
     padding: 20px;
-    object-fit: fill;
+    object-fit: contain;
 }
 
 .contenedor_principal_informacion{

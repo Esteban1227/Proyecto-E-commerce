@@ -6,9 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../static/css/crearProducto.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/crearProducto.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
 </head>
 
 <body>
+    <header class="header">
+        <div class="header_logo">
+            <h3>Logo...</h3>
+        </div>
+        <div class="header_buscador">
+            <input type="text" class="header_buscador_input" placeholder="Type your text">
+            <button class="header_buscador_button">
+                <svg class="header_buscador_icono" aria-hidden="true" viewBox="0 0 24 24">
+                    <g>
+                        <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
+                    </g>
+                </svg>
+            </button>
+        </div>
+        <div class="header_botones">
+           <a href="/registroProducto" class="header_botones_agregarProducto">
+                <img src="../static/assets/btnAgregarProducto.png" alt="">
+           </a> 
+           <div class="header_botones_menuUser">
+            <a href="/login">
+                <img src="../static/assets/btnUser.svg" alt="">
+            </a>
+           </div> 
+           <div class="header_botones_menuCarrito">
+                <img src="../static/assets/btnMenuCarrito.svg" alt="">
+           </div> 
+        </div>
+    </header>
     <main class="main">
         <div class="contenedor_principal">
 
@@ -18,68 +48,124 @@
                 </div>
             </div>
 
-            <form class="contenedor_formulario contenedor_formulario_crearProducto" id="crearProducto" action="/registroProducto" method="POST">
+            <form class="contenedor_formulario contenedor_formulario_crearProducto" enctype="multipart/form-data" id="crearProducto"
+                action="/registroProducto" method="POST">
 
                 <div class="contenedor_nombre_producto contenedor_formulario_bloque">
                     <label for="nombre">
                         Nombre
                     </label>
-                    <input class="contenedor_nombre_producto_input contenedor_formulario_input"  type="text" id="nombre" name="nombre" required placeholder="Nombre del Producto">
+                    <input class="contenedor_nombre_producto_input contenedor_formulario_input" type="text" id="nombre"
+                        name="nombre" required placeholder="Nombre del Producto">
                 </div>
 
                 <div class="contenedor_marca_producto contenedor_formulario_bloque">
                     <label for="marca">
                         Marca
                     </label>
-                    <input class="contenedor_marca_producto_input contenedor_formulario_input" type="text" id="marca" name="marca" required placeholder="Marca del producto"> 
+                    <input class="contenedor_marca_producto_input contenedor_formulario_input" type="text" id="marca"
+                        name="marca" required placeholder="Marca del producto">
                 </div>
 
                 <div class="contenedor_precio_producto contenedor_formulario_bloque">
                     <label for="precio">
                         Precio
                     </label>
-                    <input class="contenedor_precio_producto_input contenedor_formulario_input" type="text" id="precio" name="precio" required placeholder="Precio del producto">
+                    <input class="contenedor_precio_producto_input contenedor_formulario_input" type="text" id="precio"
+                        name="precio" required placeholder="Precio del producto">
                 </div>
 
                 <div class="contenedor_cantidad_producto contenedor_formulario_bloque">
                     <label for="cantidad">
                         Cantidad
                     </label>
-                    <input class="contenedor_cantidad_producto_input contenedor_formulario_input" type="text" id="cantidad" name="cantidad" required placeholder="Cantidad de producto">
+                    <input class="contenedor_cantidad_producto_input contenedor_formulario_input" type="text"
+                        id="cantidad" name="cantidad" required placeholder="Cantidad de producto">
                 </div>
 
                 <div class="contenedor_categoria_producto contenedor_formulario_bloque">
                     <label for="categoria">
                         Categoria
                     </label>
-                        <input class="contenedor_categoria_producto_input contenedor_formulario_input" type="text" id="categoria" name="categoria" required placeholder="Categoria del producto">
+                    <input class="contenedor_categoria_producto_input contenedor_formulario_input" type="text"
+                        id="categoria" name="categoria" required placeholder="Categoria del producto">
                 </div>
 
                 <div class="contenedor_descripcion_producto contenedor_formulario_bloque">
-                        <label for="descripcion">
-                            Descripcion
-                        </label>
-                        <input class="contenedor_descripcion_producto_input contenedor_formulario_input" type="text" id="descripcion" name="descripcion" required placeholder="Descripcion del producto">
+                    <label for="descripcion">
+                        Descripcion
+                    </label>
+                    <input class="contenedor_descripcion_producto_input contenedor_formulario_input" type="text"
+                        id="descripcion" name="descripcion" required placeholder="Descripcion del producto">
                 </div>
 
                 <div class="contenedor_id_usuario contenedor_formulario_bloque">
-                        <label for="idUsuario">
-                            Id Usuario
-                        </label>
-                        <input class="contenedor_id_usuario_input contenedor_formulario_input" type="text" id="idUsuario" name="idUsuario" required placeholder="Identificacion del usuario">
+                    <label for="idUsuario">
+                        Numero de documento
+                    </label>
+                    <input class="contenedor_id_usuario_input contenedor_formulario_input" type="text" id="idUsuario"
+                        name="idUsuario" required placeholder="Identificacion del usuario">
                 </div>
+            <!-- <div class="contenedor_id_usuario contenedor_formulario_bloque">
+                <label for="imgProducto">
+                    Imagen del producto
+                </label>
+                <input class="contenedor_formulario_input" type="file" id="imgProducto" name="imgProducto" required
+                    placeholder="Imagen del producto">
+            </div> -->
+            <label for="fileImg">
+                Imagen del producto
+                <label class="custum-file-upload contenedor_formulario_fileImg" for="fileImg">
+                    <div class="icon contenedor_formulario_fileImg_icono">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                            <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+                            <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path fill=""
+                                    d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                                    clip-rule="evenodd" fill-rule="evenodd"></path>
+                            </g>
+                        </svg>
+                    </div>
+                    <div class="text contenedor_formulario_fileImg_texto">
+                        <span>Click Para Subir la imagen del producto</span>
+                    </div>
+                    <input class="contenedor_formulario_fileImg_inputFile" type="file" id="fileImg" name="fileImg" onchange="previewImage()">
+                    <div id="preview" class="contenedor_formulario_fileImg_previsualizacion"></div>
+                </label>
+            </label>
+                
 
                 <p id="error" style="color: red;"></p>
 
                 <div class="contenedor_botones">
                     <button type="submit" class="contenedor_botones_input">Crear Producto</button>
                 </div>
-            
+
             </form>
 
         </div>
     </main>
     <script>
+        function previewImage() {
+            var preview = document.getElementById('preview');
+            var file = document.querySelector('input[type=file]').files[0];
+            var reader = new FileReader();
+
+            reader.onloadend = function () {
+                var img = document.createElement('img');
+                img.src = reader.result;
+                preview.innerHTML = '';
+                preview.appendChild(img);
+            }
+
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+                preview.innerHTML = 'No image selected';
+            }
+        }
+
         // document.getElementById('loginForm').addEventListener('submit', function(event) {
         //     var id = document.getElementById('id').value;
         //     var contrasena = document.getElementById('contrasena').value;
@@ -110,7 +196,6 @@
         //     }
         // });
     </script>
-    <script src="{{ url_for('static', filename='js/formulario/selector.js') }}"></script>
 </body>
 
 </html>
