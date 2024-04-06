@@ -1,0 +1,35 @@
+.contenedor_usuario{
+    width: 150px;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+.contenedor_usuario_mi_cuenta{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: solid 1px gray ;
+    padding: 10px 0px;
+    width: 95%;
+    justify-content: center;
+}
+
+.contenedor_usuario_mi_cuenta_span{
+    font-weight: bold;
+}
+
+.contenedor_usuario_cerrar_sesion{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0px;
+}
+
+.contenedor_usuario_cerrar_sesion_span{
+    font-weight: bold;
+}
