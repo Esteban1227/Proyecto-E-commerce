@@ -1,0 +1,21 @@
+.button_primary{
+    width: 100%;
+    height: 40px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    background-color: #26b1e7;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button_secundary{
+    width: 100%;
+    height: 40px;
+    border: none;
+    font-weight: bold;
+    color: black;
+    background-color: lightgrey;
+    border-radius: 5px;
+    cursor: pointer;
+}
