@@ -1,0 +1,59 @@
+.contenedor_usuario{
+    position: absolute;
+    z-index: 100;
+    top: 90px;
+    right: -50px;
+    background-color: white;
+    width: 150px;
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+.contenedor_usuario::before{
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: 43%;
+    left: 43%;
+    width: 0;
+    height: 0;
+    border-width: 0 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent #26b1e7;
+}
+
+.contenedor_usuario_mi_cuenta{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    border-bottom: solid 1px lightgrey ;
+    padding: 10px 0px;
+    width: 95%;
+    justify-content: center;
+}
+
+.contenedor_usuario_mi_cuenta_span{
+    font-weight: bold;
+    font-size: 13px;
+    color: black;
+    
+}
+
+.contenedor_usuario_cerrar_sesion{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0px;
+}
+
+.contenedor_usuario_cerrar_sesion_span{
+    font-weight: bold;
+    font-size: 13px;
+    color: black;
+}

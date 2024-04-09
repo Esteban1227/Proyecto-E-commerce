@@ -1,0 +1,109 @@
+.header_carrito{
+    position: absolute;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+    right: 0;
+    top: 90px;
+    width: 250px;
+    z-index: 100;
+  }
+  
+  .header_carrito::before{
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: 15px;
+    width: 0;
+    height: 0;
+    border-width: 0 10px 10px;
+    border-style: solid;
+    border-color: transparent transparent #26b1e7;
+  }
+  
+  .header_carrito_top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #aaaaaa;
+    padding-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .header_carrito_top_miCarrito{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color:#aaaaaa;
+  }
+  
+  .header_carrito_top_miCarrito h5{
+    margin: 0;
+    font-weight: bold;
+  }
+  
+  .header_carrito_productos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* font-weight: bold; */
+    padding: 20px 0;
+    border-bottom: 1px solid #aaaaaa;
+  }
+  
+  .header_carrito_productos_noProductos{
+    color: gray;
+    text-align: center;
+  }
+  
+  .header_carrito_botonIrCarrito{
+    text-align: center;
+    color: #26b1e7;
+    font-weight: bold;
+    padding-top: 10px;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+  
+  .header_botones_menuCarrito_boton, .header_botones_menuUser__boton{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* .inactivo{
+    display: none;
+  } */
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* Estilo para la animación de salida */
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+  /* Clase para aplicar la animación de entrada */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+  
+  /* Clase para aplicar la animación de salida */
+  .fade-out {
+    animation: fadeOut 0.5s ease-in-out forwards;
+  }
+
+  /* Oculta el menú cuando no está abierto */
+.menu {
+    display: none;
+  }
+  
+  /* Muestra el menú cuando está abierto */
+  .menu.open {
+    display: block;
+  }
