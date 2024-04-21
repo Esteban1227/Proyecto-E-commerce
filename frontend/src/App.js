@@ -34,6 +34,7 @@ function App() {
     setIsLoggedIn(true);
     localStorage.setItem("isLoggedIn", true);
     localStorage.setItem("id", id);
+    console.log(id)
   };
 
   // Verificar si el usuario está autenticado al cargar la aplicación
@@ -85,7 +86,7 @@ function App() {
           path="/Tienda/CrearProducto"
           element={
             isLoggedIn ? (
-              <Layout>
+              <Layout onLogout={handleLogout}>
                 <FormCreateProduct id={user}/>
               </Layout>
             ) : (
@@ -97,7 +98,7 @@ function App() {
           path="/Tienda/DetalleProducto"
           element={
             isLoggedIn ? (
-              <Layout>
+              <Layout onLogout={handleLogout}>
                 <ProductDetails producto={productDetail} />
               </Layout>
             ) : (
@@ -109,7 +110,7 @@ function App() {
           path="/Tienda/EditarInforamcion"
           element={
             isLoggedIn ? (
-              <Layout>
+              <Layout onLogout={handleLogout}>
                 <FormChangeUserData id={user}/>
               </Layout>
             ) : (
@@ -121,7 +122,7 @@ function App() {
           path="/Tienda/VerificarCompra"
           element={
             isLoggedIn ? (
-              <Layout>
+              <Layout onLogout={handleLogout}>
                 <Checkout />
               </Layout>
             ) : (
@@ -133,7 +134,7 @@ function App() {
           path="/Tienda/InformacionEnvio"
           element={
             isLoggedIn ? (
-              <Layout>
+              <Layout onLogout={handleLogout}>
                 <FormInformationShipping/>
               </Layout>
             ) : (
