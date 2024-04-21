@@ -15,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ProductDetails } from "./pages/ProductDetails/ProductDetails";
 import FormChangeUserData from "./pages/FormChangeUserData/FormChangeUserData";
 import Checkout from "./pages/Checout/Checkout";
+import FormChangeProductData from "./pages/FormChangeProductData/FormChangeProductData";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -136,6 +137,18 @@ function App() {
             isLoggedIn ? (
               <Layout onLogout={handleLogout}>
                 <FormInformationShipping/>
+              </Layout>
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+        <Route
+          path="/Tienda/EditarInformacionProudcto"
+          element={
+            isLoggedIn ? (
+              <Layout onLogout={handleLogout}>
+                <FormChangeProductData/>
               </Layout>
             ) : (
               <Navigate to="/" />
