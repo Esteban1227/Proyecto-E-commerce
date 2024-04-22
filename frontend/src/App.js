@@ -15,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ProductDetails } from "./pages/ProductDetails/ProductDetails";
 import FormChangeUserData from "./pages/FormChangeUserData/FormChangeUserData";
 import Checkout from "./pages/Checkout/Checkout";
+import FormChangeProductData from "./pages/FormChangeProductData/FormChangeProductData";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,6 +35,7 @@ function App() {
     setIsLoggedIn(true);
     localStorage.setItem("isLoggedIn", true);
     localStorage.setItem("id", id);
+    console.log(id)
   };
 
   // Verificar si el usuario está autenticado al cargar la aplicación
@@ -86,9 +88,7 @@ function App() {
           path="/Tienda/CrearProducto"
           element={
             isLoggedIn ? (
-              <>
                 <FormCreateProduct id={user}/>
-              </>
             ) : (
               <Navigate to="/" />
             )
@@ -98,9 +98,7 @@ function App() {
           path="/Tienda/DetalleProducto"
           element={
             isLoggedIn ? (
-              <>
                 <ProductDetails producto={productDetail} />
-              </>
             ) : (
               <Navigate to="/" />
             )
@@ -110,9 +108,7 @@ function App() {
           path="/Tienda/EditarInforamcion"
           element={
             isLoggedIn ? (
-              <>
                 <FormChangeUserData id={user}/>
-              </>
             ) : (
               <Navigate to="/" />
             )
@@ -122,9 +118,7 @@ function App() {
           path="/Tienda/VerificarCompra"
           element={
             isLoggedIn ? (
-              <>
                 <Checkout />
-              </>
             ) : (
               <Navigate to="/" />
             )
@@ -134,9 +128,17 @@ function App() {
           path="/Tienda/InformacionEnvio"
           element={
             isLoggedIn ? (
-              <>
                 <FormInformationShipping/>
-              </>
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+        <Route
+          path="/Tienda/EditarInformacionProudcto"
+          element={
+            isLoggedIn ? (
+                <FormChangeProductData/>
             ) : (
               <Navigate to="/" />
             )
