@@ -14,7 +14,7 @@ import Layout from "./components/Layout/Layout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ProductDetails } from "./pages/ProductDetails/ProductDetails";
 import FormChangeUserData from "./pages/FormChangeUserData/FormChangeUserData";
-import Checkout from "./pages/Checout/Checkout";
+import Checkout from "./pages/Checkout/Checkout";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -53,6 +53,7 @@ function App() {
 
   return (
     <Router>
+      <Layout onLogout={handleLogout}>
       <Routes>
         <Route
           path="/"
@@ -70,12 +71,12 @@ function App() {
           path="/Tienda"
           element={
             isLoggedIn ? (
-              <Layout onLogout={handleLogout}>
+              <>
                 <Shop
                   handleProductDetail={handleProductDetail}
                   user={user}
                 />
-              </Layout>
+              </>
             ) : (
               <Navigate to="/" />
             )
@@ -85,9 +86,9 @@ function App() {
           path="/Tienda/CrearProducto"
           element={
             isLoggedIn ? (
-              <Layout>
+              <>
                 <FormCreateProduct id={user}/>
-              </Layout>
+              </>
             ) : (
               <Navigate to="/" />
             )
@@ -97,9 +98,9 @@ function App() {
           path="/Tienda/DetalleProducto"
           element={
             isLoggedIn ? (
-              <Layout>
+              <>
                 <ProductDetails producto={productDetail} />
-              </Layout>
+              </>
             ) : (
               <Navigate to="/" />
             )
@@ -109,9 +110,9 @@ function App() {
           path="/Tienda/EditarInforamcion"
           element={
             isLoggedIn ? (
-              <Layout>
+              <>
                 <FormChangeUserData id={user}/>
-              </Layout>
+              </>
             ) : (
               <Navigate to="/" />
             )
@@ -121,9 +122,9 @@ function App() {
           path="/Tienda/VerificarCompra"
           element={
             isLoggedIn ? (
-              <Layout>
+              <>
                 <Checkout />
-              </Layout>
+              </>
             ) : (
               <Navigate to="/" />
             )
@@ -133,15 +134,17 @@ function App() {
           path="/Tienda/InformacionEnvio"
           element={
             isLoggedIn ? (
-              <Layout>
+              <>
                 <FormInformationShipping/>
-              </Layout>
+              </>
             ) : (
               <Navigate to="/" />
             )
           }
         />
       </Routes>
+
+      </Layout>
     </Router>
   );
 }

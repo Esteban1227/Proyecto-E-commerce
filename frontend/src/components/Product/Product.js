@@ -9,17 +9,17 @@ function Product({producto, handleProductDetail}) {
     }
 
   return (
-    <div class="contenedor_producto">
-            <div class="contenedor_producto_imagen">
-                <img class="contenedor_producto_imagen_img" src={producto.img_producto} alt="producto..." />
+    <div className="contenedor_producto">
+            <div className="contenedor_producto_imagen">
+                <img className="contenedor_producto_imagen_img" src={producto.img_producto} alt="producto..." />
             </div>
-            <div class="contenedor_producto_nombre">
+            <div className="contenedor_producto_nombre">
                 <Link to={"DetalleProducto"} onClick={btnHandleProductDetail}>
-                    <span class="contenedor_producto_nombre_span">{producto.nombre}</span>
+                    <span className="contenedor_producto_nombre_span">{producto.nombre}</span>
                 </Link>
             </div>
-            <div class="contenedor_producto_compra">
-                <span class="contenedor_producto_compra_precio">${producto.precio}</span>
+            <div className="contenedor_producto_compra">
+                <span className="contenedor_producto_compra_precio">${producto.precio}</span>
                 <div className='contenedor_producto_compra_boton'>
                     <FaCartPlus/>
                 </div>
