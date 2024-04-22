@@ -15,6 +15,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ProductDetails } from "./pages/ProductDetails/ProductDetails";
 import FormChangeUserData from "./pages/FormChangeUserData/FormChangeUserData";
 import Checkout from "./pages/Checout/Checkout";
+import FormChangeProductData from "./pages/FormChangeProductData/FormChangeProductData";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,6 +35,7 @@ function App() {
     setIsLoggedIn(true);
     localStorage.setItem("isLoggedIn", true);
     localStorage.setItem("id", id);
+    console.log(id)
   };
 
   // Verificar si el usuario está autenticado al cargar la aplicación
@@ -85,7 +87,7 @@ function App() {
           path="/Tienda/CrearProducto"
           element={
             isLoggedIn ? (
-              <Layout>
+              <Layout onLogout={handleLogout}>
                 <FormCreateProduct id={user}/>
               </Layout>
             ) : (
@@ -97,7 +99,7 @@ function App() {
           path="/Tienda/DetalleProducto"
           element={
             isLoggedIn ? (
-              <Layout>
+              <Layout onLogout={handleLogout}>
                 <ProductDetails producto={productDetail} />
               </Layout>
             ) : (
@@ -109,7 +111,7 @@ function App() {
           path="/Tienda/EditarInforamcion"
           element={
             isLoggedIn ? (
-              <Layout>
+              <Layout onLogout={handleLogout}>
                 <FormChangeUserData id={user}/>
               </Layout>
             ) : (
@@ -121,7 +123,7 @@ function App() {
           path="/Tienda/VerificarCompra"
           element={
             isLoggedIn ? (
-              <Layout>
+              <Layout onLogout={handleLogout}>
                 <Checkout />
               </Layout>
             ) : (
@@ -133,8 +135,20 @@ function App() {
           path="/Tienda/InformacionEnvio"
           element={
             isLoggedIn ? (
-              <Layout>
+              <Layout onLogout={handleLogout}>
                 <FormInformationShipping/>
+              </Layout>
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+        <Route
+          path="/Tienda/EditarInformacionProudcto"
+          element={
+            isLoggedIn ? (
+              <Layout onLogout={handleLogout}>
+                <FormChangeProductData/>
               </Layout>
             ) : (
               <Navigate to="/" />

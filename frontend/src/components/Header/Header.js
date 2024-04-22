@@ -37,7 +37,7 @@ function Header({onLogout}) {
   return (
     <header className="header" >
       <div className="header_logo">
-        <Link to={"/Tienda/VerificarCompra"}>
+        <Link to={"/Tienda/EditarInformacionProudcto"}>
           <img src={logo} alt='Logo SEV-TECHNLOGY'></img>
         </Link>
       </div>
