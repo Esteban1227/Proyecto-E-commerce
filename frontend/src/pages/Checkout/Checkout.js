@@ -49,7 +49,7 @@ export default function Checkout() {
                       <div className="container_wizard_progressbar_step">
                         <FaMapLocationDot size={"20px"} />
                       </div>
-                      <span>Punto de reocogida</span>
+                      <span>Envio</span>
                     </li>
                     <li
                       className={currentStep === 3 ? "active" : ""}
@@ -96,30 +96,30 @@ export default function Checkout() {
                   >
                     <div className="contenedor_direccion_main">
                       <h3>Direccion de Envio:</h3>
-                      <div class="contenedor_direccion">
+                      <div className="contenedor_direccion">
                         <input
-                          class="contenedor_direccion_input"
+                          className="contenedor_direccion_input"
                           type="radio"
                           id=""
                           name="direccion"
                         />
                         {/* <img src="./ubicacion.jpg" alt="iconoUbicacion" /> */}
                         <FaLocationDot size={"20px"} color="#26b1e7" />
-                        <div class="contenedor_direccion_informacion">
+                        <div className="contenedor_direccion_informacion">
                           <span>Calle 59 # 2bn 60 </span>
                           <span>Cuidad</span>
                         </div>
                       </div>
-                      <div class="contenedor_direccion">
+                      <div className="contenedor_direccion">
                         <input
-                          class="contenedor_direccion_input"
+                          className="contenedor_direccion_input"
                           type="radio"
                           id=""
                           name="direccion"
                         />
                         {/* <img src="./ubicacion.jpg" alt="iconoUbicacion" /> */}
                         <FaLocationDot size={"20px"} color="#26b1e7" />
-                        <div class="contenedor_direccion_informacion">
+                        <div className="contenedor_direccion_informacion">
                           <span>Calle 59 # 2bn 60 </span>
                           <span>Cuidad</span>
                         </div>
@@ -152,29 +152,16 @@ export default function Checkout() {
                   >
                     <div className="contenedor_medio_pago_main">
                       <h3>Metodos de Pago:</h3>
-                      <div class="contenedor_medio_pago">
+                      <div className="contenedor_medio_pago">
                         <input
-                          class="contenedor_medio_pago_input"
+                          className="contenedor_medio_pago_input"
                           type="radio"
                           id=""
                           name="pago"
                         />
                         {/* <img src="./bancolombia.jpg" alt="iconoUbicacion"> */}
                         <FaPaypal />
-                        <div class="contenedor_pago_informacion">
-                          <span>PayPal</span>
-                        </div>
-                      </div>
-                      <div class="contenedor_medio_pago">
-                        <input
-                          class="contenedor_medio_pago_input"
-                          type="radio"
-                          id=""
-                          name="pago"
-                        />
-                        {/* <img src="./bancolombia.jpg" alt="iconoUbicacion"> */}
-                        <FaPaypal />
-                        <div class="contenedor_pago_informacion">
+                        <div className="contenedor_pago_informacion">
                           <span>PayPal</span>
                         </div>
                       </div>
@@ -237,13 +224,13 @@ export default function Checkout() {
                       </a>
                     </span>
                   </div>
-                  <button
+                  {/* <button
                     type="button"
                     className="button purchase_summary_info_buttons_button"
                     disabled
                   >
                     Pagar
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
