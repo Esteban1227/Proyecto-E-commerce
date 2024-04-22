@@ -83,10 +83,10 @@ function previewImage(event) {
   }
 
   return (
-    <div class="contenedor_principal">
-      <div class="contenedor_selectores">
-        <div class="contenedor_crear_producto activo">
-          <span class="contendor_crear_producto_span">Crear Producto</span>
+    <div className="contenedor_principal">
+      <div className="contenedor_selectores">
+        <div className="contenedor_crear_producto activo">
+          <span className="contendor_crear_producto_span">Crear Producto</span>
         </div>
       </div>
 
@@ -177,10 +177,10 @@ function previewImage(event) {
         <label className="contenedor_formulario_bloqueImg" for="fileImg">
           Imagen del producto
           <label
-            class="custum-file-upload contenedor_formulario_fileImg"
+            className="custum-file-upload contenedor_formulario_fileImg"
             for="fileImg"
           >
-            <div class="icon contenedor_formulario_fileImg_icono">
+            <div className="icon contenedor_formulario_fileImg_icono">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill=""
@@ -202,11 +202,11 @@ function previewImage(event) {
                 </g>
               </svg>
             </div>
-            <div class="text contenedor_formulario_fileImg_texto">
+            <div className="text contenedor_formulario_fileImg_texto">
               <span>Click Para Subir la imagen del producto</span>
             </div>
             <input
-              class="contenedor_formulario_fileImg_inputFile"
+              className="contenedor_formulario_fileImg_inputFile"
               type="file"
               id="fileImg"
               name="fileImg"
@@ -215,14 +215,14 @@ function previewImage(event) {
             />
             <div
               id="preview"
-              class="contenedor_formulario_fileImg_previsualizacion"
+              className="contenedor_formulario_fileImg_previsualizacion"
             >
               {previewSrc && <img src={previewSrc} alt="Previsualización" />}
             </div>
           </label>
         </label>
-        <div class="contenedor_botones">
-          <button type="submit" class="contenedor_botones_input">
+        <div className="contenedor_botones">
+          <button type="submit" className="contenedor_botones_input">
             Crear Producto
           </button>
         </div>

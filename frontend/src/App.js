@@ -14,7 +14,7 @@ import Layout from "./components/Layout/Layout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ProductDetails } from "./pages/ProductDetails/ProductDetails";
 import FormChangeUserData from "./pages/FormChangeUserData/FormChangeUserData";
-import Checkout from "./pages/Checout/Checkout";
+import Checkout from "./pages/Checkout/Checkout";
 import FormChangeProductData from "./pages/FormChangeProductData/FormChangeProductData";
 
 function App() {
@@ -55,6 +55,7 @@ function App() {
 
   return (
     <Router>
+      <Layout onLogout={handleLogout}>
       <Routes>
         <Route
           path="/"
@@ -72,12 +73,12 @@ function App() {
           path="/Tienda"
           element={
             isLoggedIn ? (
-              <Layout onLogout={handleLogout}>
+              <>
                 <Shop
                   handleProductDetail={handleProductDetail}
                   user={user}
                 />
-              </Layout>
+              </>
             ) : (
               <Navigate to="/" />
             )
@@ -87,9 +88,7 @@ function App() {
           path="/Tienda/CrearProducto"
           element={
             isLoggedIn ? (
-              <Layout onLogout={handleLogout}>
                 <FormCreateProduct id={user}/>
-              </Layout>
             ) : (
               <Navigate to="/" />
             )
@@ -99,9 +98,7 @@ function App() {
           path="/Tienda/DetalleProducto"
           element={
             isLoggedIn ? (
-              <Layout onLogout={handleLogout}>
                 <ProductDetails producto={productDetail} />
-              </Layout>
             ) : (
               <Navigate to="/" />
             )
@@ -111,9 +108,7 @@ function App() {
           path="/Tienda/EditarInforamcion"
           element={
             isLoggedIn ? (
-              <Layout onLogout={handleLogout}>
                 <FormChangeUserData id={user}/>
-              </Layout>
             ) : (
               <Navigate to="/" />
             )
@@ -123,9 +118,7 @@ function App() {
           path="/Tienda/VerificarCompra"
           element={
             isLoggedIn ? (
-              <Layout onLogout={handleLogout}>
                 <Checkout />
-              </Layout>
             ) : (
               <Navigate to="/" />
             )
@@ -135,9 +128,7 @@ function App() {
           path="/Tienda/InformacionEnvio"
           element={
             isLoggedIn ? (
-              <Layout onLogout={handleLogout}>
                 <FormInformationShipping/>
-              </Layout>
             ) : (
               <Navigate to="/" />
             )
@@ -147,15 +138,15 @@ function App() {
           path="/Tienda/EditarInformacionProudcto"
           element={
             isLoggedIn ? (
-              <Layout onLogout={handleLogout}>
                 <FormChangeProductData/>
-              </Layout>
             ) : (
               <Navigate to="/" />
             )
           }
         />
       </Routes>
+
+      </Layout>
     </Router>
   );
 }

@@ -31,78 +31,78 @@ export default function FormChangeUserData({ id }) {
   return (
     <React.Fragment>
       {data.map((user) => (
-        <div class="contenedor_principal_mi_usuario">
-          <div class="contenedor_bienvenida_mi_cuenta">
-            <h3 class="contenedor_bienvenida_mi_cuenta_h3">Bienvenid@</h3>
-            <span class="contenedor_bienvenida_mi_cuenta_s">{user.nombre + " " + user.apellido}</span>
+        <div className="contenedor_principal_mi_usuario">
+          <div className="contenedor_bienvenida_mi_cuenta">
+            <h3 className="contenedor_bienvenida_mi_cuenta_h3">Bienvenid@</h3>
+            <span className="contenedor_bienvenida_mi_cuenta_s">{user.nombre + " " + user.apellido}</span>
           </div>
-          <form class="contenedor_principal_formulario_mi_usuario" action="">
-            <div class="contenedor_principal_formulario_mi_usuario_bloque">
+          <form className="contenedor_principal_formulario_mi_usuario" action="">
+            <div className="contenedor_principal_formulario_mi_usuario_bloque">
               <label
-                class="contenedor_principal_formulario_mi_usuario_label"
+                className="contenedor_principal_formulario_mi_usuario_label"
                 for="nombre"
               >
                 Nombre
               </label>
               <input
-                class="contenedor_principal_formulario_mi_usuario_input"
+                className="contenedor_principal_formulario_mi_usuario_input"
                 type="text"
                 value={user.nombre}
               />
             </div>
-            <div class="contenedor_principal_formulario_mi_usuario_bloque">
+            <div className="contenedor_principal_formulario_mi_usuario_bloque">
               <label
-                class="contenedor_principal_formulario_mi_usuario_label"
+                className="contenedor_principal_formulario_mi_usuario_label"
                 for="apellido"
               >
                 Apellido
               </label>
               <input
-                class="contenedor_principal_formulario_mi_usuario_input"
+                className="contenedor_principal_formulario_mi_usuario_input"
                 type="text"
                 value={user.apellido}
               />
             </div>
-            <div class="contenedor_principal_formulario_mi_usuario_bloque">
+            <div className="contenedor_principal_formulario_mi_usuario_bloque">
               <label
-                class="contenedor_principal_formulario_mi_usuario_label"
+                className="contenedor_principal_formulario_mi_usuario_label"
                 for="numero_de_documento"
               >
                 Numero de documento
               </label>
               <input
-                class="contenedor_principal_formulario_mi_usuario_input"
+                className="contenedor_principal_formulario_mi_usuario_input"
                 type="text"
                 value={user.id}
               />
             </div>
-            <div class="contenedor_principal_formulario_mi_usuario_bloque">
+            <div className="contenedor_principal_formulario_mi_usuario_bloque">
               <label
-                class="contenedor_principal_formulario_mi_usuario_label"
+                className="contenedor_principal_formulario_mi_usuario_label"
                 for="correo_eletronico"
               >
                 Correo electronico
               </label>
               <input
-                class="contenedor_principal_formulario_mi_usuario_input"
+                className="contenedor_principal_formulario_mi_usuario_input"
                 type="text"
                 value={user.correo}
               />
             </div>
-            <div class="contenedor_principal_formulario_mi_usuario_bloque">
+            <div className="contenedor_principal_formulario_mi_usuario_bloque">
               <label
-                class="contenedor_principal_formulario_mi_usuario_label"
+                className="contenedor_principal_formulario_mi_usuario_label"
                 for="contraseña"
               >
                 Contraseña
               </label>
               <input
-                class="contenedor_principal_formulario_mi_usuario_input"
+                className="contenedor_principal_formulario_mi_usuario_input"
                 type="password"
                 value={user.contrasena}
               />
             </div>
-            <div class="contenedor_principal_formulario_mi_usuario_boton">
+            <div className="contenedor_principal_formulario_mi_usuario_boton">
               <ButtonPrimary>
                 Guardar cambios
               </ButtonPrimary>
