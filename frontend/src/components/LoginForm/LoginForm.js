@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import ButtonPrimary from '../Button/ButtonPrimary';
 
 function LoginForm({ onSimpleLogin }) {
   const [id, setId] = useState('');
@@ -26,7 +27,7 @@ function LoginForm({ onSimpleLogin }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='contenedor_formulario'>
       <div className="contenedor_documentoIdentidad contenedor_formulario_bloque">
         <label htmlFor="id">Documento de identidad</label>
         <input
@@ -52,11 +53,9 @@ function LoginForm({ onSimpleLogin }) {
           placeholder="******"
         />
       </div>
-      <div className="contenedor_botones">
-        <button type="submit" className="contenedor_botones_input">
+        <ButtonPrimary type={"submit"}>
           Ingresar a mi cuenta
-        </button>
-      </div>
+        </ButtonPrimary>
       {error && <span>{error}</span>}
     </form>
   );

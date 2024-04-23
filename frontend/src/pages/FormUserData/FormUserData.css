@@ -1,0 +1,31 @@
+.contenedor_bienvenida_mi_cuenta{
+    width: 100%;
+    text-align: center;
+    border-bottom: solid 2px lightgray;
+    padding: 10px 0;
+}
+
+.contenedor_bienvenida_mi_cuenta_h3{
+    font-weight: bold;
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+.contenedor_bienvenida_mi_cuenta_s{
+    color: grey;
+    font-size: 20px;
+}
+
+.contenedor_principal_selector{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contenedor_principal_selector_miCuenta, .contenedor_principal_selector_misProductos{
+    width: 100%;
+    padding: 20px;
+    border-bottom: 4px solid lightgray;
+    cursor: pointer;
+    text-align: center;
+}
