@@ -3,6 +3,7 @@
     flex-direction: row;
     gap: 20px;
     box-shadow: none;
+    max-width: 1000px;
 }
 
 .detalleProducto_contenedorImg{

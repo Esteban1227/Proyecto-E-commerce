@@ -210,7 +210,7 @@ export default function Checkout() {
                     <li>$20000</li>
                   </ul>
                 </div>
-                <div className="purchase_summary_info_buttons">
+                {/* <div className="purchase_summary_info_buttons">
                   <div className="purchase_summary_info_containerCheckbox">
                     <input
                       type="checkbox"
@@ -223,15 +223,15 @@ export default function Checkout() {
                         Términos y condiciones
                       </a>
                     </span>
-                  </div>
-                  {/* <button
+                  </div> */}
+                  <button
                     type="button"
                     className="button purchase_summary_info_buttons_button"
                     disabled
                   >
                     Pagar
-                  </button> */}
-                </div>
+                  </button>
+                {/* </div> */}
               </div>
             </div>
           </div>
