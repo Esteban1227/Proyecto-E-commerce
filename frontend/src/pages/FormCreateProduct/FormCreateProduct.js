@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { toast } from 'sonner'
+import ButtonPrimary from "../../components/Button/ButtonPrimary";
+import { toast } from "sonner";
 import "./FormCreateProduct.css";
 
-function FormCreateProduct({id}) {
+function FormCreateProduct({ id }) {
   const [previewSrc, setPreviewSrc] = useState(null); // Estado para almacenar la URL de la imagen previa
-  const[nombre, setNombre] = useState("");
+  const [nombre, setNombre] = useState("");
   const [marca, setMarca] = useState("");
   const [precio, setPrecio] = useState("");
   const [cantidad, setCantidad] = useState("");
@@ -14,16 +15,16 @@ function FormCreateProduct({id}) {
   const [fileImg, setFileImg] = useState(null);
 
   function clearForm() {
-    const formCreateProduct = document.getElementById("form-createProduct")
-    
-    formCreateProduct.querySelectorAll("input").forEach(input =>{
-      input.value = ""
-    })
-    const imgPreview = document.getElementById("preview")
-  
+    const formCreateProduct = document.getElementById("form-createProduct");
+
+    formCreateProduct.querySelectorAll("input").forEach((input) => {
+      input.value = "";
+    });
+    const imgPreview = document.getElementById("preview");
+
     while (imgPreview.firstChild) {
       imgPreview.removeChild(imgPreview.firstChild);
-  }
+    }
   }
 
   // Función para manejar el envío del formulario
@@ -31,50 +32,49 @@ function FormCreateProduct({id}) {
     event.preventDefault();
 
     try {
-        const formData = {
-            nombre:nombre,
-            marca:marca,
-            precio: precio,
-            cantidad: cantidad,
-            categoria: categoria,
-            descripcion: descripcion,
-            idUsuario: id,
-            fileImg: fileImg
-        };
+      const formData = {
+        nombre: nombre,
+        marca: marca,
+        precio: precio,
+        cantidad: cantidad,
+        categoria: categoria,
+        descripcion: descripcion,
+        idUsuario: id,
+        fileImg: fileImg,
+      };
 
       const response = await axios.post(
         "http://127.0.0.1:5000/api/post/CreateProduct",
         formData
       );
 
-      
       // Verificar si la creación del producto fue exitosa
       if (response.status === 200) {
         // Producto creado exitosamente, maneja el resultado según sea necesario
-        clearForm()
+        clearForm();
 
-        toast.success('Producto creado con exito')
+        toast.success("Producto creado con exito");
       } else {
         // Maneja el caso de error
-        toast.error('No se a podido crear el producto ' + response.status)
+        toast.error("No se a podido crear el producto " + response.status);
       }
     } catch (error) {
-      toast.error('No se a podido crear el producto' + error)
+      toast.error("No se a podido crear el producto" + error);
     }
   }
 
   // Función para manejar la selección de la imagen
 
-// Función para previsualizar la imagen seleccionada
-function previewImage(event) {
+  // Función para previsualizar la imagen seleccionada
+  function previewImage(event) {
     const file = event.target.files[0];
-    
+
     const reader = new FileReader();
-    
+
     reader.onloadend = () => {
-        const imageData = reader.result;
-        setFileImg(imageData);
-        setPreviewSrc(imageData); // Actualiza el estado con la URL de la imagen previa
+      const imageData = reader.result;
+      setFileImg(imageData);
+      setPreviewSrc(imageData); // Actualiza el estado con la URL de la imagen previa
     };
 
     if (file) {
@@ -84,17 +84,20 @@ function previewImage(event) {
 
   return (
     <div className="contenedor_principal">
-      <div className="contenedor_selectores">
-        <div className="contenedor_crear_producto activo">
-          <span className="contendor_crear_producto_span">Crear Producto</span>
-        </div>
+      <div className="line">
+        <h2 className="">Crear Producto</h2>
       </div>
 
-      <form id="form-createProduct" className="contenedor_formulario contenedor_formulario_crearProducto" encType="multipart/form-data" onSubmit={handleSubmit}>
-        <div className="contenedor_nombre_producto contenedor_formulario_bloque">
+      <form
+        id="form-createProduct"
+        className="contenedor_formulario"
+        encType="multipart/form-data"
+        onSubmit={handleSubmit}
+      >
+        <div className="contenedor_formulario_bloque">
           <label htmlFor="nombre">Nombre</label>
           <input
-            className="contenedor_nombre_producto_input contenedor_formulario_input"
+            className=""
             type="text"
             id="nombre"
             name="nombre"
@@ -105,10 +108,10 @@ function previewImage(event) {
           />
         </div>
 
-        <div className="contenedor_marca_producto contenedor_formulario_bloque">
+        <div className=" contenedor_formulario_bloque">
           <label htmlFor="marca">Marca</label>
           <input
-            className="contenedor_marca_producto_input contenedor_formulario_input"
+            className=""
             type="text"
             id="marca"
             name="marca"
@@ -119,10 +122,10 @@ function previewImage(event) {
           />
         </div>
 
-        <div className="contenedor_precio_producto contenedor_formulario_bloque">
+        <div className="contenedor_formulario_bloque">
           <label htmlFor="precio">Precio</label>
           <input
-            className="contenedor_precio_producto_input contenedor_formulario_input"
+            className=""
             type="text"
             id="precio"
             name="precio"
@@ -133,10 +136,10 @@ function previewImage(event) {
           />
         </div>
 
-        <div className="contenedor_cantidad_producto contenedor_formulario_bloque">
+        <div className="contenedor_formulario_bloque">
           <label htmlFor="cantidad">Cantidad</label>
           <input
-            className="contenedor_cantidad_producto_input contenedor_formulario_input"
+            className=""
             type="text"
             id="cantidad"
             name="cantidad"
@@ -147,10 +150,10 @@ function previewImage(event) {
           />
         </div>
 
-        <div className="contenedor_categoria_producto contenedor_formulario_bloque">
+        <div className="contenedor_formulario_bloque">
           <label htmlFor="categoria">Categoría</label>
           <input
-            className="contenedor_categoria_producto_input contenedor_formulario_input"
+            className=""
             type="text"
             id="categoria"
             name="categoria"
@@ -161,10 +164,10 @@ function previewImage(event) {
           />
         </div>
 
-        <div className="contenedor_descripcion_producto contenedor_formulario_bloque">
+        <div className="contenedor_formulario_bloque">
           <label htmlFor="descripcion">Descripción</label>
           <input
-            className="contenedor_descripcion_producto_input contenedor_formulario_input"
+            className=""
             type="text"
             id="descripcion"
             name="descripcion"
@@ -211,7 +214,6 @@ function previewImage(event) {
               id="fileImg"
               name="fileImg"
               onChange={previewImage}
-              
             />
             <div
               id="preview"
@@ -221,11 +223,7 @@ function previewImage(event) {
             </div>
           </label>
         </label>
-        <div className="contenedor_botones">
-          <button type="submit" className="contenedor_botones_input">
-            Crear Producto
-          </button>
-        </div>
+        <ButtonPrimary type={"submit"}>Crear Producto</ButtonPrimary>
       </form>
     </div>
   );

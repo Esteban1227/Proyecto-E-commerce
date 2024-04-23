@@ -13,7 +13,10 @@ function FormLoginAndLogout({ onSimpleLogin, onLoginWithUserData }) {
   return (
     <main>
       <div className="contenedor_principal">
-        <div className="contenedor_selectores">
+          <div className="line">
+            <h2>Bienvenid@</h2>
+          </div>
+        <div className="display-flex contenedor_selector">
           <div
             className={`contenedor_iniciar_sesion ${
               formularioActivo === "iniciarSesion" ? "activo" : ""
@@ -21,7 +24,7 @@ function FormLoginAndLogout({ onSimpleLogin, onLoginWithUserData }) {
             onClick={() => mostrarFormulario("iniciarSesion")}
           >
             <span className="contendor_iniciar_sesion_span">
-              iniciar sesion
+              Iniciar Sesion
             </span>
           </div>
           <div
@@ -30,7 +33,7 @@ function FormLoginAndLogout({ onSimpleLogin, onLoginWithUserData }) {
             }`}
             onClick={() => mostrarFormulario("crearUsuario")}
           >
-            <span className="contenedor_crear_cuenta_span">crear cuenta</span>
+            <span className="contenedor_crear_cuenta_span">Crear Cuenta</span>
           </div>
         </div>
 

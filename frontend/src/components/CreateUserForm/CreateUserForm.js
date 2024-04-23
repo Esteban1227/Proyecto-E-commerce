@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import ButtonPrimary from '../Button/ButtonPrimary';
 
 function CreateUserForm({ onSimpleLogin }) {
     const [id, setId] = useState('');
@@ -48,11 +49,11 @@ function CreateUserForm({ onSimpleLogin }) {
     }
   
     return (
-      <form onSubmit={handleSubmit}>
-        <div className="contenedor_documentoIdentidad contenedor_formulario_bloque">
+      <form onSubmit={handleSubmit} className='contenedor_formulario'>
+        <div className="contenedor_formulario_bloque">
           <label htmlFor="id">Numero de documento</label>
           <input
-            className="contenedor_correo_eletronico_input contenedor_formulario_input"
+            className=""
             type="text"
             id="id"
             name="id"
@@ -63,10 +64,10 @@ function CreateUserForm({ onSimpleLogin }) {
           />
         </div>
   
-        <div className="contenedor_correo_electronico contenedor_formulario_bloque">
+        <div className="contenedor_formulario_bloque">
           <label htmlFor="nombre">Nombre</label>
           <input
-            className="contenedor_correo_eletronico_input contenedor_formulario_input"
+            className=""
             type="text"
             id="nombre"
             name="nombre"
@@ -77,10 +78,10 @@ function CreateUserForm({ onSimpleLogin }) {
           />
         </div>
   
-        <div className="contenedor_correo_electronico contenedor_formulario_bloque">
+        <div className="contenedor_formulario_bloque">
           <label htmlFor="apellido">Apellido</label>
           <input
-            className="contenedor_correo_eletronico_input contenedor_formulario_input"
+            className=""
             type="text"
             id="apellido"
             name="apellido"
@@ -91,10 +92,10 @@ function CreateUserForm({ onSimpleLogin }) {
           />
         </div>
   
-        <div className="contenedor_correo_electronico contenedor_formulario_bloque">
+        <div className="contenedor_formulario_bloque">
           <label htmlFor="correo">Correo Electronico</label>
           <input
-            className="contenedor_correo_eletronico_input contenedor_formulario_input"
+            className=""
             type="email"
             id="correo"
             name="correo"
@@ -105,10 +106,10 @@ function CreateUserForm({ onSimpleLogin }) {
           />
         </div>
   
-        <div className="contenedor_contrasena contenedor_formulario_bloque">
+        <div className="contenedor_formulario_bloque">
           <label htmlFor="contrasena">Contraseña</label>
           <input
-            className="contenedor_contrasena_input contenedor_formulario_input"
+            className=""
             type="password"
             id="contrasena"
             name="contrasena"
@@ -118,10 +119,9 @@ function CreateUserForm({ onSimpleLogin }) {
             placeholder="******"
           />
         </div>
-  
-        <button type="submit" className="contenedor_botones_input">
+        <ButtonPrimary type={"submit"}>
           Crear cuenta
-        </button>
+        </ButtonPrimary>
       </form>
     );
   }

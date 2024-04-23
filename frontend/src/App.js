@@ -13,7 +13,7 @@ import FormCreateProduct from "./pages/FormCreateProduct/FormCreateProduct";
 import Layout from "./components/Layout/Layout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ProductDetails } from "./pages/ProductDetails/ProductDetails";
-import FormChangeUserData from "./pages/FormChangeUserData/FormChangeUserData";
+import FormUserData from "./pages/FormUserData/FormUserData";
 import Checkout from "./pages/Checkout/Checkout";
 import FormChangeProductData from "./pages/FormChangeProductData/FormChangeProductData";
 
@@ -108,7 +108,7 @@ function App() {
           path="/Tienda/EditarInforamcion"
           element={
             isLoggedIn ? (
-                <FormChangeUserData id={user}/>
+                <FormUserData id={user}/>
             ) : (
               <Navigate to="/" />
             )
