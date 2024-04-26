@@ -83,14 +83,17 @@ def login():
     contrasena = datos.get('contrasena')
 
     if id and contrasena:
-        # Verificar las credenciales del usuario en la base de datos
-        conexion = ConexionBD()
-        resultado = conexion.select(f"SELECT * FROM usuarios WHERE id = '{id}' AND contrasena = '{contrasena}'")
-        if resultado:
-            access_token = create_access_token(identity=id, expires_delta=False)
-            return jsonify(access_token=access_token)
-        else:
-            return jsonify({'error': 'Nombre de usuario o contraseña incorrectos'}), 401
+        try:
+            # Verificar las credenciales del usuario en la base de datos
+            conexion = ConexionBD()
+            resultado = conexion.select(f"SELECT * FROM usuarios WHERE id = '{id}' AND contrasena = '{contrasena}'")
+            if resultado:
+                access_token = create_access_token(identity=id, expires_delta=False)
+                return jsonify(access_token=access_token)
+            else:
+                return jsonify({'error': 'Nombre de usuario o contraseña incorrectos'}), 401
+        except:
+            return jsonify({'error': '404'})    
     else:
         return jsonify({'error': 'Se requiere el ID y la contraseña'}), 400
 

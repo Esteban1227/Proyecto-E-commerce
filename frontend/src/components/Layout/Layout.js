@@ -3,17 +3,15 @@ import Header from '../Header/Header'
 import { Toaster } from 'sonner'
 import "./Layout.css"
 import HeaderNotLogin from '../Header/HeaderNotLogin'
+import { useLoginAndLogout } from '../../hooks/useLoginAndLogout'
 
-export default function Layout({children, onLogout}) {
+export default function Layout({children}) {
   
-  const [isLogin, setIsLogin] = useState(true)
-  useEffect(() => {
-    setIsLogin(window.localStorage.isLoggedIn)
-  } );
-  // setIsLogin((window.location.href).includes("/"))
+  const { isLoggedIn } = useLoginAndLogout()
+
   return (
     <React.Fragment>
-        {isLogin ? <Header onLogout={onLogout}/> : <HeaderNotLogin />}
+        {isLoggedIn ? <Header/> : <HeaderNotLogin />}
         
         <main>
             {children}

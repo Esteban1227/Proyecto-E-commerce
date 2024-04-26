@@ -1,28 +1,30 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ButtonPrimary from '../Button/ButtonPrimary';
+import { useLoginAndLogout } from '../../hooks/useLoginAndLogout';
+import { toast } from "sonner";
 
 function LoginForm({ onSimpleLogin }) {
-  const [id, setId] = useState('');
-  const [contrasena, setContrasena] = useState('');
-  const [error, setError] = useState('');
+  const { user, setUser } = useLoginAndLogout()
+  const [error, setError] = useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
     
     try {
-      const response = await axios.post('http://127.0.0.1:5000/api/post/login', { id, contrasena });
+      const response = await axios.post('http://127.0.0.1:5000/api/post/login', { id:user.id, contrasena:user.contrasena });
 
       if (response.status === 200) {
         const data = response.data;
         localStorage.setItem('access_token', data.access_token);
-        onSimpleLogin(id);
+        onSimpleLogin(user.id);
       } else {
-        const data = response.data;
-        setError(data.error);
+        setError(true)
+        toast.error("Datos incorrectos " + response.status);
       }
     } catch (error) {
-      console.error('Error al iniciar sesión:', error);
+      setError(true)
+      toast.error("Error al iniciar sesión");
     }
   }
 
@@ -33,10 +35,10 @@ function LoginForm({ onSimpleLogin }) {
         <input
           type="text"
           id="id"
-          value={id}
-          onChange={(event) => setId(event.target.value)}
+          value={user.id}
+          onChange={(event) => setUser(prevState => ({...prevState, id: event.target.value}) )}
           required
-          className="contenedor_documentoIdentidad_input contenedor_formulario_input"
+          className={error ? "error" : ""}
           placeholder="1107837851"
         />
       </div>
@@ -46,17 +48,16 @@ function LoginForm({ onSimpleLogin }) {
         <input
           type="password"
           id="contrasena"
-          value={contrasena}
-          onChange={(event) => setContrasena(event.target.value)}
+          value={user.contrasena}
+          onChange={(event) => setUser(prevState => ({...prevState, contrasena: event.target.value}))}
           required
-          className="contenedor_contrasena_input contenedor_formulario_input"
+          className={error ? "error" : ""}
           placeholder="******"
         />
       </div>
         <ButtonPrimary type={"submit"}>
           Ingresar a mi cuenta
         </ButtonPrimary>
-      {error && <span>{error}</span>}
     </form>
   );
 }
