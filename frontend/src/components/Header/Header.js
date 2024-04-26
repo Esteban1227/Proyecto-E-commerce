@@ -9,7 +9,7 @@ import CartMenu from "../CartMenu/CartMenu";
 import MenuUser from "../MenuUser/MenuUser";
 import logo from "../../assets/SEV-TECHNOLOGY.png";
 
-function Header({ onLogout }) {
+function Header() {
   const [openMenu, setOpenMenu] = useState(null); // Estado para rastrear el menú abierto
 
   const cartRef = useRef(null); // Ref para el contenedor principal del encabezado
@@ -38,6 +38,7 @@ function Header({ onLogout }) {
   const toggleMenu = (menu) => {
     setOpenMenu(openMenu === menu ? null : menu);
   };
+
 
   return (
     <header className="header">
@@ -77,7 +78,7 @@ function Header({ onLogout }) {
           >
             <BiSolidUserCircle size={"25px"} style={{ color: "#ffffff" }} />
           </div>
-          <MenuUser openMenu={openMenu} onLogout={onLogout} />
+          <MenuUser openMenu={openMenu} />
         </div>
         <div className="header_botones_menuCarrito" ref={cartRef}>
           <div

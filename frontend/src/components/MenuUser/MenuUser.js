@@ -3,11 +3,10 @@ import { FaUserAlt } from "react-icons/fa";
 import { IoLogOut } from "react-icons/io5";
 import "./MenuUser.css" 
 import { Link } from 'react-router-dom';
+import { useLoginAndLogout } from '../../hooks/useLoginAndLogout';
 
-export default function MenuUser({openMenu, onLogout}) {
-  const handleLogout = () => {
-    onLogout(); // Llama a la función de cierre de sesión
-  };
+export default function MenuUser({openMenu}) {
+  const { handleLogout } = useLoginAndLogout()
   return (
     <div className={openMenu === 'usuario' ? "contenedor_usuario animate__animated  animate__fadeIn animate__faster" : "inactivo"}>
             <Link to={"/Tienda/EditarInforamcion"} className='contenedor_usuario_mi_cuenta'>

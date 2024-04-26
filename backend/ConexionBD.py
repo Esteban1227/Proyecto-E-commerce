@@ -17,13 +17,13 @@ class ConexionBD:
                     dbname=dbname,
                     user=user,
                     password=password,
-                    host=host,  # O la dirección de tu servidor PostgreSQL
-                    port=port        # El puerto por defecto es 5432
+                    host=host,  
+                    port=port
                 )
-            print("Conexion a la base de datos exitosa")
+            # print("Conexion a la base de datos exitosa")
             self.cursor = self.conexion.cursor()    
         except OperationalError or Exception as e:
-            print(f"Error al conectar a la base de datos: {e}")
+            # print(f"Error al conectar a la base de datos: {e}")
             return None
     
     def cerrarBD(self):
