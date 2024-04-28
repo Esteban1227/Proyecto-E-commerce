@@ -23,6 +23,11 @@ input, select, textarea{
   border-radius: 5px;
 }
 
+textarea{
+  max-height: 50vh;
+  min-height: 200px;
+}
+
 input.error{
   border: solid 2px red;
 
