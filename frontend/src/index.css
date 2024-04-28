@@ -15,7 +15,7 @@ a{
   color: inherit;
 }
 
-input, select{
+input, select, textarea{
   border: solid 2px lightgrey;
   background-color: transparent;
   height: 40px;
