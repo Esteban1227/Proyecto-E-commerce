@@ -10,6 +10,8 @@ CORS(app)
 
 app.config['JWT_SECRET_KEY'] = 'your_secret_key'
 
+jwt = JWTManager(app)
+
 @app.route('/api/post/ActualizarUsuario', methods=['POST'])
 def actualizarUsuario():
     try:
