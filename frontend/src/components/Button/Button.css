@@ -7,6 +7,16 @@
     background-color: #26b1e7;
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+.button_primary:disabled{
+    background-color: lightgray;
+    cursor: initial;
+}
+
+.button_primary:disabled:hover{
+    transform: scale(1);
 }
 
 .button_secundary{
@@ -14,8 +24,16 @@
     height: 40px;
     border: none;
     font-weight: bold;
-    color: black;
+    color: rgb(58, 57, 57);
     background-color: lightgrey;
     border-radius: 5px;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+
+
+.button_secundary:hover, .button_primary:hover{
+    transition: 0.2s;
+    transform: scale(1.02);
 }

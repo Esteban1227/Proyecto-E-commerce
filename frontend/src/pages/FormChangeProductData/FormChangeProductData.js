@@ -1,10 +1,27 @@
 import React, { useState } from "react";
 import "./FormChangeProductData.css";
 import ButtonPrimary from "../../components/Button/ButtonPrimary";
+import { useProductEdit } from "../../hooks/useProductEdit";
+import { useLoginAndLogout } from "../../hooks/useLoginAndLogout";
+import { toast } from "sonner";
+import axios from "axios";
 
 export default function FormChangeProductData() {
-  const [fileImg, setFileImg] = useState(null);
-  const [previewSrc, setPreviewSrc] = useState(null);
+  const { productEdit } = useProductEdit()
+  
+  const [previewSrc, setPreviewSrc] = useState(null); // Estado para almacenar la URL de la imagen previa
+  const [nombre, setNombre] = useState(productEdit.nombre);
+  const [productId, setProductId] = useState(productEdit.id );
+  const [marca, setMarca] = useState(productEdit.marca);
+  const [precio, setPrecio] = useState(productEdit.precio);
+  const [cantidad, setCantidad] = useState(productEdit.cantidad);
+  const [categoria, setCategoria] = useState(productEdit.categoria);
+  const [descripcion, setDescripcion] = useState(productEdit.descripcion);
+  const [fileImg, setFileImg] = useState(productEdit.img_producto);
+  const { userId } = useLoginAndLogout()
+  const [dataChange, setDataChange] = useState(false);
+
+  
   function previewImage(event) {
     const file = event.target.files[0];
 
@@ -20,13 +37,53 @@ export default function FormChangeProductData() {
       reader.readAsDataURL(file);
     }
   }
+
+  // Función para manejar el envío del formulario
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    try {
+      const formData = {
+        id:productId,
+        nombre: nombre,
+        marca: marca,
+        precio: precio,
+        cantidad: cantidad,
+        categoria: categoria,
+        descripcion: descripcion,
+        idUsuario: userId,
+        fileImg: fileImg,
+      };
+
+      const response = await axios.post(
+        "http://127.0.0.1:5000/api/post/ActualizarProducto",
+        formData
+      );
+
+      // Verificar si la creación del producto fue exitosa
+      if (response.status === 200) {
+        // Producto creado exitosamente, maneja el resultado según sea necesario
+        // clearForm();
+
+        toast.success("Producto creado con exito");
+      } else {
+        // Maneja el caso de error
+        toast.error("No se a podido crear el producto " + response.status);
+      }
+    } catch (error) {
+      toast.error("No se a podido crear el producto" + error);
+    }
+  }
+
+
   return (
-    <div class="contenedor_principal">
-      <div class="line">
+    <section className="contenedor_principal formulario">
+      <div className="line">
         <h2>Editar Producto</h2>
       </div>
 
       <form
+        onSubmit={handleSubmit}
         id="form-createProduct"
         className="contenedor_formulario contenedor_formulario_crearProducto"
         encType="multipart/form-data"
@@ -39,7 +96,8 @@ export default function FormChangeProductData() {
             id="nombre"
             name="nombre"
             required
-            placeholder="Nombre del Producto"
+            value={nombre}
+            onChange={(event) => {setNombre(event.target.value); setDataChange(true)}}
           />
         </div>
 
@@ -51,7 +109,9 @@ export default function FormChangeProductData() {
             id="marca"
             name="marca"
             required
-            placeholder="Marca del producto"
+            value={marca}
+            onChange={(event) => {setMarca(event.target.value); setDataChange(true)}}
+
           />
         </div>
 
@@ -63,7 +123,9 @@ export default function FormChangeProductData() {
             id="precio"
             name="precio"
             required
-            placeholder="Precio del producto"
+            value={precio}
+            onChange={(event) => {setPrecio(event.target.value); setDataChange(true)}}
+
           />
         </div>
 
@@ -75,7 +137,9 @@ export default function FormChangeProductData() {
             id="cantidad"
             name="cantidad"
             required
-            placeholder="Cantidad de producto"
+            value={cantidad}
+            onChange={(event) => {setCantidad(event.target.value); setDataChange(true)}}
+
           />
         </div>
 
@@ -87,7 +151,9 @@ export default function FormChangeProductData() {
             id="categoria"
             name="categoria"
             required
-            placeholder="Categoría del producto"
+            value={categoria}
+            onChange={(event) => {setCategoria(event.target.value); setDataChange(true)}}
+
           />
         </div>
 
@@ -99,16 +165,18 @@ export default function FormChangeProductData() {
             id="descripcion"
             name="descripcion"
             required
-            placeholder="Descripción del producto"
+            value={descripcion}
+            onChange={(event) => {setDescripcion(event.target.value); setDataChange(true)}}
+
           />
         </div>
         <label className="contenedor_formulario_bloqueImg" for="fileImg">
           Imagen del producto
           <label
-            class="custum-file-upload contenedor_formulario_fileImg"
+            className="custum-file-upload contenedor_formulario_fileImg"
             for="fileImg"
           >
-            <div class="icon contenedor_formulario_fileImg_icono">
+            <div className="icon contenedor_formulario_fileImg_icono">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill=""
@@ -130,27 +198,28 @@ export default function FormChangeProductData() {
                 </g>
               </svg>
             </div>
-            <div class="text contenedor_formulario_fileImg_texto">
+            <div className="text contenedor_formulario_fileImg_texto">
               <span>Click Para Subir la imagen del producto</span>
             </div>
             <input
-              class="contenedor_formulario_fileImg_inputFile"
+              className="contenedor_formulario_fileImg_inputFile"
               type="file"
               id="fileImg"
               name="fileImg"
-              onChange={previewImage}
+              onChange={(event) => {setDataChange(true); previewImage(event)}}
+
             />
             <div
               id="preview"
-              class="contenedor_formulario_fileImg_previsualizacion"
+              className="contenedor_formulario_fileImg_previsualizacion"
             >
-              {previewSrc && <img src={previewSrc} alt="Previsualización" />}
+              {previewSrc ? <img src={previewSrc} alt="Previsualización"/> :  <img src={fileImg} alt="Previsualización" />}
             </div>
           </label>
         </label>
 
-        <ButtonPrimary type={"submit"}>Guardar Producto</ButtonPrimary>
+        <ButtonPrimary type={"submit"} disabled={!dataChange}>Guardar cambios</ButtonPrimary>
       </form>
-    </div>
+    </section>
   );
 }

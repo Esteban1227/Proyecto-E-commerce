@@ -9,6 +9,10 @@ import { FaMapLocationDot, FaMoneyBills, FaLocationDot } from "react-icons/fa6";
 import { CiCirclePlus } from "react-icons/ci";
 import { FaPaypal } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { MdEditSquare } from "react-icons/md";
+import { useCart } from "../../hooks/useCart";
+import { formatoPrecio } from "../../utils/formatoPrecio";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 export default function Checkout() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -25,6 +29,14 @@ export default function Checkout() {
     event.preventDefault(); // Evita el comportamiento predeterminado del formulario
     // Agrega la lógica para enviar el formulario si es necesario
   };
+
+  const { cart } = useCart();
+
+  const totalCompra = 
+    cart.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue.precio * currentValue.cantidad;
+    }, 0);
+
   return (
     <main className="checkOut">
       <div className="container">
@@ -36,14 +48,29 @@ export default function Checkout() {
                 <form id="msform" onSubmit={handleSubmit}>
                   {/* progressbar */}
                   <ul id="progressbar" className="container_wizard_progressbar">
-                    <li className={currentStep === 1 ? "active" : ""} id="home">
+                    <li
+                      className={
+                        currentStep === 1
+                          ? "active"
+                          : currentStep > 1
+                          ? "active"
+                          : ""
+                      }
+                      id="home"
+                    >
                       <div className="container_wizard_progressbar_step">
                         <BsFillCartCheckFill size={"20px"} />
                       </div>
                       <span> Productos </span>
                     </li>
                     <li
-                      className={currentStep === 2 ? "active" : ""}
+                      className={
+                        currentStep === 2
+                          ? "active"
+                          : currentStep > 2
+                          ? "active"
+                          : ""
+                      }
                       id="personalInfo"
                     >
                       <div className="container_wizard_progressbar_step">
@@ -52,7 +79,13 @@ export default function Checkout() {
                       <span>Envio</span>
                     </li>
                     <li
-                      className={currentStep === 3 ? "active" : ""}
+                      className={
+                        currentStep === 3
+                          ? "active"
+                          : currentStep > 3
+                          ? "active"
+                          : ""
+                      }
                       id="userInfo"
                     >
                       <div className="container_wizard_progressbar_step">
@@ -65,24 +98,34 @@ export default function Checkout() {
                   <fieldset
                     style={{ display: currentStep === 1 ? "block" : "none" }}
                   >
-                    {/* <div className="container_wizard_editCart">
-                    <span className="container_wizard_editCart_text">Edidar tu carrito</span>
-                    <i className="fas fa-edit"></i>
-                  </div> */}
-                    <div className="container_wizard_product">
-                      <img
-                        className="container_wizard_product_img"
-                        src="images/single_4.jpg"
-                        alt=""
-                      />
-                      <div className="container_wizard_product_info">
-                        <span className="container_wizard_product_info_name">
-                          MacBook Air 13 (1)
-                        </span>
-                        <span className="container_wizard_product_info_price">
-                          $2000
-                        </span>
-                      </div>
+                    <div className="container_wizard_editCart">
+                      <span className="container_wizard_editCart_text">
+                        Edidar tu carrito
+                      </span>
+                      <Link to={"/Tienda/carrito"}>
+                        <button>
+                          <MdEditSquare color="#26b1e7" />
+                        </button>
+                      </Link>
+                    </div>
+                    <div className="container_wizard_products">
+                      {cart.map((product) => (
+                        <div className="container_wizard_product">
+                          <img
+                            className="container_wizard_product_img"
+                            src={product.img_producto}
+                            alt=""
+                          />
+                          <div className="container_wizard_product_info">
+                            <span className="container_wizard_product_info_name">
+                              {product.nombre} ({product.cantidad})
+                            </span>
+                            <span className="container_wizard_product_info_price">
+                              {formatoPrecio(product.precio)}
+                            </span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                     <div className="container_wizard_buttons">
                       <ButtonPrimary onClick={handleNext}>
@@ -193,45 +236,41 @@ export default function Checkout() {
                 <div className="purchase_summary_info_products">
                   <span>Productos:</span>
                   <ul>
-                    <li>MacBook Air 13</li>
-                    <li>MacBook Air 13</li>
-                    <li>MacBook Air 13</li>
-                  </ul>
-                </div>
-                <div className="purchase_summary_info_subtotal">
-                  <span>Subtotal:</span>
-                  <ul>
-                    <li>$20000</li>
+                    {cart.map((product) => (
+                      <li>{product.nombre}</li>
+                    ))}
                   </ul>
                 </div>
                 <div className="purchase_summary_info_total">
                   <span>Total:</span>
                   <ul>
-                    <li>$20000</li>
+                    <li>{totalCompra}</li>
                   </ul>
                 </div>
-                {/* <div className="purchase_summary_info_buttons">
-                  <div className="purchase_summary_info_containerCheckbox">
-                    <input
-                      type="checkbox"
-                      className="purchase_summary_info_containerCheckbox_input"
-                    />
-                    <span>
-                      Declaro que he leído y acepto la política de Protección de
-                      datos personales, Política de privacidad,{" "}
-                      <a href="./termsAndConditions.html" className="link">
-                        Términos y condiciones
-                      </a>
-                    </span>
-                  </div> */}
-                  <button
-                    type="button"
-                    className="button purchase_summary_info_buttons_button"
-                    disabled
-                  >
-                    Pagar
-                  </button>
-                {/* </div> */}
+                
+                <PayPalScriptProvider options={{ clientId: "test", currency:"USD" }}>
+                  <PayPalButtons 
+                    style={{ layout: "horizontal" }} 
+                    createOrder={(data, actions) => {
+                      return actions.order.create({
+                        purchase_units:[
+                          {
+                            amount:{  
+                              value: totalCompra
+                            }
+                          }
+                        ]
+                      })
+                    }} 
+                    onApprove={async (data, actions) => {
+                      const order  = await actions.order?.capture()
+                      console.log(order)
+                    }}
+                    onCancel={async (data, actions) => {
+                      const order  = await actions.order?.capture()
+                      console.log(order)}}
+                  />
+                </PayPalScriptProvider>
               </div>
             </div>
           </div>

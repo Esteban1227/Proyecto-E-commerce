@@ -2,26 +2,36 @@ import React from "react";
 import "./FormUserProducts.css";
 import { FaEdit } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import useGetProductsUser from "../../hooks/useGetProductsUser";
+import { useProductEdit } from "../../hooks/useProductEdit";
 
 export default function FormUserProducts() {
+
+  const { productsUser } = useGetProductsUser()
+
+  const { setProductEdit } = useProductEdit()
+
   return (
     <div className="contenedor_productosUser">
-      <div className="contenedor_productosUser_producto">
-        <img src="" alt="producto" />
-        <div className="contenedor_productosUser_producto_informacion">
-          <span className="contenedor_productosUser_producto_informacion--nombre">
-            TIG Antorcha 150 A Elite 10 / 25
-          </span>
-          <span className="contenedor_productosUser_producto_informacion--precio">
-            $200.000
-          </span>
+      {productsUser.map(producto =>(
+        <div className="contenedor_productosUser_producto">
+          <img src={producto.img_producto}
+              alt={producto.descripcion} />
+          <div className="contenedor_productosUser_producto_informacion">
+            <span className="contenedor_productosUser_producto_informacion--nombre">
+              {producto.nombre}
+            </span>
+            <span className="contenedor_productosUser_producto_informacion--precio">
+              {producto.precio}
+            </span>
+          </div>
+          <button onClick={() => setProductEdit(producto)}>
+              <Link to={"/Tienda/EditarInformacionProudcto"}>
+                  <FaEdit size={"20px"} color="#26b1e7"/>
+              </Link>
+          </button>
         </div>
-        <div>
-            <Link to={"/Tienda/EditarInformacionProudcto"}>
-                <FaEdit size={"20px"} color="#26b1e7"/>
-            </Link>
-        </div>
-      </div>
+      ))}
     </div>
   );
 }

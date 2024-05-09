@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import CreateUserForm from "../../components/CreateUserForm/CreateUserForm";
 
-function FormLoginAndLogout({ onSimpleLogin, onLoginWithUserData }) {
+function FormLoginAndLogout() {
   const [formularioActivo, setFormularioActivo] = useState("iniciarSesion");
 
   function mostrarFormulario(formulario) {
@@ -12,7 +12,7 @@ function FormLoginAndLogout({ onSimpleLogin, onLoginWithUserData }) {
 
   return (
     <main>
-      <div className="contenedor_principal">
+      <div className="contenedor_principal formulario">
           <div className="line">
             <h2>Bienvenid@</h2>
           </div>
@@ -39,13 +39,9 @@ function FormLoginAndLogout({ onSimpleLogin, onLoginWithUserData }) {
 
         {formularioActivo === "iniciarSesion" ? (
           <LoginForm
-            onSimpleLogin={onSimpleLogin}
-            onLoginWithUserData={onLoginWithUserData}
           />
         ) : (
           <CreateUserForm
-            onSimpleLogin={onSimpleLogin}
-            onLoginWithUserData={onLoginWithUserData}
           />
         )}
       </div>
