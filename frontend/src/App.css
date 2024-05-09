@@ -4,8 +4,7 @@
 
 
 .contenedor_principal{
-    max-width: 600px;
-  width: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,6 +12,9 @@
     padding: 50px 100px;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
+}
+.contenedor_principal.formulario{
+    max-width: 600px;
 }
 
 .activo{

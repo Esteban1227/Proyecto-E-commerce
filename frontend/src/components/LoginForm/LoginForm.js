@@ -4,9 +4,11 @@ import ButtonPrimary from '../Button/ButtonPrimary';
 import { useLoginAndLogout } from '../../hooks/useLoginAndLogout';
 import { toast } from "sonner";
 
-function LoginForm({ onSimpleLogin }) {
-  const { user, setUser } = useLoginAndLogout()
+function LoginForm() {
+  const { user, setUser, handleSimpleLogin } = useLoginAndLogout()
   const [error, setError] = useState(false);
+
+
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -17,7 +19,7 @@ function LoginForm({ onSimpleLogin }) {
       if (response.status === 200) {
         const data = response.data;
         localStorage.setItem('access_token', data.access_token);
-        onSimpleLogin(user.id);
+        handleSimpleLogin(user.id);
       } else {
         setError(true)
         toast.error("Datos incorrectos " + response.status);

@@ -11,8 +11,12 @@ body {
 }
 
 a{
-  text-decoration: none;
-  color: inherit;
+  text-decoration: none !important;
+}
+
+button{
+  background-color: inherit;
+  border: inherit;
 }
 
 input, select, textarea{
@@ -21,6 +25,11 @@ input, select, textarea{
   height: 40px;
   margin-top: 5px;
   border-radius: 5px;
+}
+
+textarea{
+  max-height: 50vh;
+  min-height: 200px;
 }
 
 input.error{
@@ -33,5 +42,10 @@ label{
 }
 
 h1,h2,h3,h4,h5,h6{
-  color: #26b1e7 !important;
+  margin-bottom: 0 !important;
+}
+
+ul{
+  padding: 0 !important;
+  margin: 0 !important;
 }

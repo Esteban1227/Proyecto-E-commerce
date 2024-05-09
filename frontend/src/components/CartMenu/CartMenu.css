@@ -1,109 +1,142 @@
-.header_carrito{
-    position: absolute;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-    right: 0;
-    top: 90px;
-    width: 250px;
-    z-index: 100;
-  }
-  
-  .header_carrito::before{
-    content: "";
-    position: absolute;
-    top: -20px;
-    right: 15px;
-    width: 0;
-    height: 0;
-    border-width: 0 10px 10px;
-    border-style: solid;
-    border-color: transparent transparent #26b1e7;
-  }
-  
-  .header_carrito_top{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #aaaaaa;
-    padding-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  .header_carrito_top_miCarrito{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color:#aaaaaa;
-  }
-  
-  .header_carrito_top_miCarrito h5{
-    margin: 0;
-    font-weight: bold;
-  }
-  
-  .header_carrito_productos{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* font-weight: bold; */
-    padding: 20px 0;
-    border-bottom: 1px solid #aaaaaa;
-  }
-  
-  .header_carrito_productos_noProductos{
-    color: gray;
-    text-align: center;
-  }
-  
-  .header_carrito_botonIrCarrito{
-    text-align: center;
-    color: #26b1e7;
-    font-weight: bold;
-    padding-top: 10px;
-    cursor: pointer;
-    text-decoration: underline;
-  }
-  
-  .header_botones_menuCarrito_boton, .header_botones_menuUser__boton{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.header_carrito {
+  position: absolute;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  right: 0;
+  top: 90px;
+  width: 350px;
+  z-index: 200;
+  cursor: initial;
+}
+
+.header_carrito::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 15px;
+  width: 0;
+  height: 0;
+  border-width: 0 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent #26b1e7;
+}
+
+.header_carrito_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #aaaaaa;
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+.header_carrito_top_miCarrito {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #26b1e7;
+}
+
+.header_carrito_top_miCarrito h5 {
+  margin: 0;
+  font-weight: bold;
+}
+
+.header_carrito_top_limpiarCarro{
+  cursor: pointer;
+}
+.header_carrito_productos_producto_eliminarProducto{
+  display: flex;
+  height: 100%;
+
+}
+.header_carrito_productos_producto_eliminarProducto_boton{
+  cursor: pointer;
+}
+
+.header_carrito_productos {
+  padding: 10px 0 !important;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.header_carrito_productos_producto {
+  width: 100%;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 10px 0;
+}
+
+.header_carrito_productos_producto_imagen {
+  width: 100px;
+  height: 100%;
+  img {
     width: 100%;
     height: 100%;
+    object-fit: contain;
   }
-  
-  /* .inactivo{
-    display: none;
-  } */
+}
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  /* Estilo para la animación de salida */
-  @keyframes fadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-  }
-  
-  /* Clase para aplicar la animación de entrada */
-  .fade-in {
-    animation: fadeIn 0.5s ease-in-out forwards;
-  }
-  
-  /* Clase para aplicar la animación de salida */
-  .fade-out {
-    animation: fadeOut 0.5s ease-in-out forwards;
-  }
+.header_carrito_productos_producto_informacion{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: calc(100%/2);
+}
 
-  /* Oculta el menú cuando no está abierto */
-.menu {
-    display: none;
-  }
+.header_carrito_productos_producto_informacion_nombre{
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.header_carrito_productos_producto_informacion_precio{
+  color: #26b1e7;
+  font-weight: bold;
+}
+.header_carrito_productos_producto_informacion_cantidad{
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   
-  /* Muestra el menú cuando está abierto */
-  .menu.open {
-    display: block;
-  }
+}
+
+.header_carrito_productos_noProductos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px ;
+  width: 100%;
+  color: gray;
+  text-align: center;
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.header_carrito_botonIrCarrito{
+  text-align: center;
+
+}
+
+.header_carrito_botonIrCarrito a{
+  color: #26b1e7 !important;
+  font-weight: bold;
+  padding-top: 10px;
+  cursor: pointer;
+  text-decoration: underline !important;
+}
+
+.header_botones_menuCarrito_boton,
+.header_botones_menuUser__boton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}

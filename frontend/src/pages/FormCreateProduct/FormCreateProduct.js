@@ -3,8 +3,9 @@ import axios from "axios";
 import ButtonPrimary from "../../components/Button/ButtonPrimary";
 import { toast } from "sonner";
 import "./FormCreateProduct.css";
+import { useLoginAndLogout } from "../../hooks/useLoginAndLogout";
 
-function FormCreateProduct({ id }) {
+function FormCreateProduct() {
   const [previewSrc, setPreviewSrc] = useState(null); // Estado para almacenar la URL de la imagen previa
   const [nombre, setNombre] = useState("");
   const [marca, setMarca] = useState("");
@@ -13,6 +14,7 @@ function FormCreateProduct({ id }) {
   const [categoria, setCategoria] = useState("");
   const [descripcion, setDescripcion] = useState("");
   const [fileImg, setFileImg] = useState(null);
+  const { userId } = useLoginAndLogout()
 
   function clearForm() {
     const formCreateProduct = document.getElementById("form-createProduct");
@@ -39,7 +41,7 @@ function FormCreateProduct({ id }) {
         cantidad: cantidad,
         categoria: categoria,
         descripcion: descripcion,
-        idUsuario: id,
+        idUsuario: userId,
         fileImg: fileImg,
       };
 
@@ -83,7 +85,7 @@ function FormCreateProduct({ id }) {
   }
 
   return (
-    <div className="contenedor_principal">
+    <section className="contenedor_principal formulario">
       <div className="line">
         <h2 className="">Crear Producto</h2>
       </div>
@@ -225,7 +227,7 @@ function FormCreateProduct({ id }) {
         </label>
         <ButtonPrimary type={"submit"}>Crear Producto</ButtonPrimary>
       </form>
-    </div>
+    </section>
   );
 }
 

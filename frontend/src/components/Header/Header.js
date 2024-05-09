@@ -39,14 +39,11 @@ function Header() {
     setOpenMenu(openMenu === menu ? null : menu);
   };
 
-
   return (
     <header className="header">
-      <div className="header_logo">
-        <Link to={"/Tienda/VerificarCompra"}>
-          <img src={logo} alt="Logo SEV-TECHNLOGY"></img>
-        </Link>
-      </div>
+      <Link to={"/"} className="header_logo">
+        <img src={logo} alt="Logo SEV-TECHNLOGY" />
+      </Link>
       <div className="header_buscador">
         <input
           type="text"

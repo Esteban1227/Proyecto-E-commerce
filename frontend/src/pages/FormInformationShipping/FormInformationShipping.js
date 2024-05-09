@@ -4,7 +4,7 @@ import "./FormInformationShipping.css";
 
 export default function FormInformationShipping() {
   return (
-    <div className="contenedor_principal">
+    <section className="contenedor_principal formulario">
       <div className="line">
         <h2> Informacion Domicilio</h2>
       </div>
@@ -123,6 +123,6 @@ export default function FormInformationShipping() {
 
           <ButtonPrimary>Guardar</ButtonPrimary>
       </form>
-    </div>
+    </section>
   );
 }

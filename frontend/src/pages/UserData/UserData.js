@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./FormUserData.css";
+import "./UserData.css";
 import FormChangeUserData from "../../components/FormChangeUserData/FormChangeUserData";
 import FormUserProducts from "../../components/FormUserProducts/FormUserProducts";
+import { useLoginAndLogout } from "../../hooks/useLoginAndLogout";
 
-export default function FormUserData({ id }) {
+export default function UserData() {
   const [data, setData] = useState([]);
   const [formularioActivo, setFormularioActivo] = useState("miCuenta");
+  const { userId } = useLoginAndLogout()
 
   function mostrarFormulario(formulario) {
     setFormularioActivo(formulario);
@@ -16,7 +18,7 @@ export default function FormUserData({ id }) {
     async function handleData() {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:5000/api/get/usuarios/" + id
+          `http://127.0.0.1:5000/api/get/usuarios/${userId}`
         );
 
         if (response.status === 200) {
@@ -37,7 +39,7 @@ export default function FormUserData({ id }) {
   return (
     <React.Fragment>
       {data.map((user) => (
-        <div key={user.id} className="contenedor_principal">
+        <section key={user.id} className="contenedor_principal formulario">
           <div className="contenedor_bienvenida_mi_cuenta">
             <h3 className="contenedor_bienvenida_mi_cuenta_h3">Bienvenid@</h3>
             <span className="contenedor_bienvenida_mi_cuenta_s">{user.nombre + " " + user.apellido}</span>
@@ -57,7 +59,7 @@ export default function FormUserData({ id }) {
             </div>
           </div>
           {formularioActivo === "miCuenta" ? (<FormChangeUserData user={user}/>) : <FormUserProducts />}
-        </div>
+        </section>
       ))}
     </React.Fragment>
   );

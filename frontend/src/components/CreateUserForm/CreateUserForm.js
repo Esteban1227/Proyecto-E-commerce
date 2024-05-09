@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ButtonPrimary from '../Button/ButtonPrimary';
+import { useLoginAndLogout } from '../../hooks/useLoginAndLogout';
 
-function CreateUserForm({ onSimpleLogin }) {
+function CreateUserForm() {
     const [id, setId] = useState('');
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [correo, setCorreo] = useState('');
     const [contrasena, setContrasena] = useState('');
     const [error, setError] = useState('');
+
+    const { handleSimpleLogin } = useLoginAndLogout();
+
   
     async function handleSubmit(event) {
       event.preventDefault();
@@ -36,7 +40,7 @@ function CreateUserForm({ onSimpleLogin }) {
             const data = loginResponse.data;
             localStorage.setItem('access_token', data.access_token);
             // Llama a la función onLogin para actualizar el estado de autenticación en el componente principal
-            onSimpleLogin(id);
+            handleSimpleLogin(id);
           }
         } else {
           const data = response.data;

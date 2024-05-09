@@ -1,26 +1,29 @@
 .detalleProducto{
     justify-content: center;
-    flex-direction: row;
+    flex-direction: row !important;
     gap: 20px;
     box-shadow: none;
-    max-width: 1000px;
+    padding: 0;
+    height: 600px;
 }
 
 .detalleProducto_contenedorImg{
+    width: 700px;
+    height: 100%;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
     position: relative;
 }
 
 .detalleProducto_contenedorImg-img{
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    height: 100%;
     padding: 20px;
     object-fit: contain;
 }
 
 .detalleProducto_contenedorInformacion{
     width: 300px;
-    height: 500px;
+    height: 100%;
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
     padding: 20px;
     display: flex;
@@ -46,6 +49,7 @@
     border: 1px solid gray;
     border-radius: 8px;
     height: 50px;
+    overflow: hidden;
 
 }
 
@@ -58,7 +62,15 @@
     display: flex;
     flex-direction: column;
     border-left: 1px solid gray;
-    width: 24px;
+    transition: 0.2s;
+    button{
+        transition: 0.2s;
+    }
+    button:hover{
+        transition: 0.2s;
+        color: white;
+        background-color: #26b1e7;
+    }
 }
 
 .detalleProducto_contenedorInformacion_contenedorInferior{
@@ -102,49 +114,6 @@
 .modal_body{
     max-height: 80vh;
     overflow-y: scroll;
-}
-
-.modal_body_contendorComentarios{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.modal_body_contendorComentarios_comentario{
-    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-radius: 10px;
-    transition: 0.2s;
-}
-.modal_body_contendorComentarios_comentario:hover{
-    transform: scale(1.02);
-    transition: 0.2s;
-}
-
-.modal_body_contendorComentarios_agregarComentario{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    gap: 5px;
-    width: 100%;
-    height: 50px;
-    background-color: white;
-    border-radius: 10px;
-    border: #26b1e7 solid 2px;
-    transition: 0.2s;
-    color: #26b1e7;
-    cursor: pointer;
-}
-.modal_body_contendorComentarios_agregarComentario:hover{
-    background-color: #26b1e7;
-    color: white;
-    transition: 0.2s;
-    transform: scale(1.02);
-}
-.modal_body_contendorComentarios_agregarComentario:hover::after{
-    content: "Agrega un comentario";
-    font-weight: bold;
 }
 
 .modal_body_calificacion{

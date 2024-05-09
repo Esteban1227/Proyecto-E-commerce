@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-export const loginAndLogOutContext = createContext();
+export const LoginAndLogOutContext = createContext();
 
 export const LoginAndLogOutProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -8,14 +8,12 @@ export const LoginAndLogOutProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
 
   const [user, setUser] = useState({id:null, password:null})
-
-  
   
   return (
-    <loginAndLogOutContext.Provider
+    <LoginAndLogOutContext.Provider
       value={{ userId, isLoggedIn, setIsLoggedIn, setUserId,user, setUser }}
     >
       {children}
-    </loginAndLogOutContext.Provider>
+    </LoginAndLogOutContext.Provider>
   );
 };

@@ -1,10 +1,7 @@
 from flask import Flask, jsonify, request
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-import os
+from flask_jwt_extended import JWTManager, create_access_token
 from flask_cors import CORS
-from ConexionBD import ConexionBD   
-from werkzeug.utils import secure_filename
-import base64
+from ConexionBD import ConexionBD 
 
 
 app = Flask(__name__)
@@ -13,22 +10,50 @@ CORS(app)
 
 app.config['JWT_SECRET_KEY'] = 'your_secret_key'
 
-jwt = JWTManager(app)
+@app.route('/api/post/ActualizarUsuario', methods=['POST'])
+def actualizarUsuario():
+    try:
+        datos = request.json
+        id = datos.get('id')
+        nuevoId = datos.get('nuevoId')
+        nombre = datos.get('nombre')
+        apellido = datos.get('apellido')
+        correo = datos.get('correo')
+        contrasena = datos.get('contrasena')
+            
+        conexion = ConexionBD()  # Inicializa tu conexión a la base de datos
+        # Realiza la actualización en la base de datos
+        conexion.update("UPDATE public.usuarios SET id=%s, nombre=%s, apellido=%s, correo=%s, contrasena=%s WHERE id=%s;", (nuevoId, nombre, apellido, correo, contrasena, id))
+        
+        return jsonify({'status': '200'})
+    except Exception as e:
+        print(str(e))  # Manejo de errores para depuración
+        return jsonify({'error': '404'})
 
-# Definir la carpeta donde se guardarán las imágenes
-UPLOAD_FOLDER = './static/upload/'
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-def allowed_file(filename):
-    # Verificar si la extensión del archivo es permitida
-    ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def get_uploaded_images():
-    upload_dir = app.config['UPLOAD_FOLDER']
-    return [filename for filename in os.listdir(upload_dir) if os.path.isfile(os.path.join(upload_dir, filename))]
+@app.route('/api/post/ActualizarProducto', methods=['POST'])
+def actualizarProducto():
+    try:
+        datos = request.json
+        producto_id = datos.get('id')  # Asumiendo que tienes un campo 'idProducto' para identificar el producto a actualizar
+        nombre = datos.get('nombre')
+        marca = datos.get('marca')
+        precio = datos.get('precio')
+        cantidad = datos.get('cantidad')
+        categoria = datos.get('categoria')
+        descripcion = datos.get('descripcion')
+        idUsuario = datos.get('idUsuario')
+        imagen_base64 = datos.get('fileImg')
+        
+        conexion = ConexionBD()  # Inicializa tu conexión a la base de datos
+        # Realiza la actualización en la base de datos
+        # conexion.update("UPDATE public.producto SET nombre=%s, marca=%s, precio=%s, categoria=%s, descripcion=%s, id_usuario=%s, cantidad=%s, img_producto=%s WHERE id=%s;", 
+        #                 (nombre, marca, precio, categoria, descripcion, idUsuario, cantidad, imagen_base64, producto_id))
+        conexion.update("UPDATE public.producto SET nombre=%s, marca=%s, precio=%s, categoria=%s, descripcion=%s, id_usuario=%s, cantidad=%s, img_producto=%s WHERE id_producto=%s;",
+                        (nombre, marca, precio, categoria, descripcion, idUsuario, cantidad, imagen_base64, producto_id))   
+        
+        return jsonify({'status': '200'})
+    except Exception as e:  
+        return jsonify({'error': '404'})
 
 @app.route('/api/post/CreateProduct', methods=['POST'])
 
@@ -49,7 +74,6 @@ def crearProducto():
     except:
         return jsonify({'error': '404'})
     
-
 @app.route('/api/post/CreateUser', methods=['POST'])
 
 def CreateUser():
@@ -97,17 +121,11 @@ def login():
     else:
         return jsonify({'error': 'Se requiere el ID y la contraseña'}), 400
 
-@app.route('/protected', methods=['GET'])
-@jwt_required()
-def protected():
-    current_user = get_jwt_identity()
-    return jsonify(logged_in_as=current_user), 200
-
 @app.route('/api/get/productos/<id>', methods=['GET'])
 
-def obtenerProductosPorId(id):
+def obtenerProductosPorUserId(id):
     conexion = ConexionBD()
-    resultado = conexion.select(f"SELECT * FROM public.producto WHERE id_producto = '{id}';") 
+    resultado = conexion.select(f"SELECT * FROM public.producto WHERE id_usuario = '{id}';") 
     productos_dict = []
     for producto in resultado:
         producto_dict = {
@@ -119,7 +137,7 @@ def obtenerProductosPorId(id):
             'descripcion': producto[5],
             'id_usuario': producto[6],
             'cantidad': producto[7],
-            'img_producto': producto[8]
+            'img_producto': producto[8].tobytes().decode('utf-8') 
         }
         productos_dict.append(producto_dict)
     
@@ -182,17 +200,6 @@ def obtenerUsuariosPorId(id):
         listaUsuarios.append(diccionarioUsuarios)
     
     return jsonify(listaUsuarios)
-# @app.route('/producto/<id>')
-# def product_detail(id):
-#     return render_template('producto.html')
-
-# @app.route('/')
-# def inicio():
-#     if 'id' in session:
-#         # id = session['id']
-#         return render_template("index.html")
-#     return redirect(url_for('login'))
 
 if __name__ == '__main__':
-    # app.secret_key = 'super_secret_key'
     app.run(debug=True)

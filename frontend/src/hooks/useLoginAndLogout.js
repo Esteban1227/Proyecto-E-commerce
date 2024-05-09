@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
-import { loginAndLogOutContext } from "../context/loginAndLogout";
+import { LoginAndLogOutContext } from "../context/loginAndLogout";
 
 export const useLoginAndLogout = () => {
 
-    const { userId, isLoggedIn, setUserId,  setIsLoggedIn, user, setUser } = useContext(loginAndLogOutContext)
+  const { userId, isLoggedIn, setUserId,  setIsLoggedIn, user, setUser } = useContext(LoginAndLogOutContext)
 
   const handleSimpleLogin = (id) => {
     setIsLoggedIn(true);

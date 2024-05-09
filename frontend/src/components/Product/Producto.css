@@ -1,6 +1,6 @@
 .contenedor_producto{
     width: 240px;
-    height: 360px;
+    max-height: 400px;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     display: flex;
@@ -14,52 +14,78 @@
     transform: scale(1.1);
     transition: 0.2s ease-in;
 }
+.contenedor_producto_imagen{
+    border-bottom: 1px lightgray solid;
+    padding-bottom: 10px;
+
+}
 
 .contenedor_producto_imagen_img{
     object-fit: contain;
-    border-bottom: 1px gray solid;
     width: 100%;
-    height: 250px;
+    height: 240px;
 }
 
-.contenedor_producto_nombre a{
-    list-style: none;
-    color: #26b1e7;
-    text-decoration: none;
+.contenedor_producto_informacion{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding-top: 10px;
+}
+
+.contenedor_producto_informacion_nombre{
     font-weight: bold;
+    font-size: 16px;
+    color: black;
 }
 
-.contenedor_producto_nombre_span{
-    font-size: 17px;
+.contenedor_producto_informacion_cantidad{
+    font-size: 13px;
 }
 
-.contenedor_producto_compra{
+.contenedor_producto_informacion_compra{
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.contenedor_producto_compra_precio{
-    color: black;
-    font-size: 14px;
+.contenedor_producto_informacion_compra_precio{
+    color: #26b1e7;
+    font-size: 15px;
+    font-weight: bold;
 }
 
-.contenedor_producto_compra_boton{
+.contenedor_producto_informacion_compra_boton{
     width: 30px;
     height: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
-  cursor: pointer;
-    background-color: lightgray;
+    cursor: pointer;
     border-radius: 50%;
     transition: 0.2s ease-in;
-    color: gray;
 }
 
-.contenedor_producto_compra_boton:hover{
+.contenedor_producto_informacion_compra_boton:hover{
     transform: scale(1.1);
     transition: 0.2s ease-in;
     background-color: #26b1e7;
     color: white;
+}
+
+.contenedor_producto_informacion_compra_boton-iconoRemoverPorducto{
+    background-color: #26b1e7;
+    color: white;
+}
+
+.contenedor_producto_informacion_compra_boton-iconoAgregarPorducto{
+    background-color: lightgray;
+    color: gray;
+}
+
+.header_carrito_productos_producto_informacion_cantidad--desactivado{
+    color: lightgray;
+}
+.header_carrito_productos_producto_informacion_cantidad--activado{
+    color: #26b1e7;
 }

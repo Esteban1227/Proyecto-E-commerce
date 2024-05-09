@@ -1,0 +1,138 @@
+.contenedor_cart{
+    max-width: 1000px;
+}
+
+.contenedor_cart_top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.contenedor_cart_top_left{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #26b1e7;
+    h2{
+        font-weight: bold;
+    }
+}
+
+.header_carrito_top_limpiarCarro{
+    transition: 0.2s;
+    color: #AAAAAA;
+    &:hover{
+        color: red;
+        transition: 0.2s;
+        transform: scale(1.1);
+    }
+}
+
+.contenedor_cart_notProductos{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #AAAAAA;
+    span{
+        font-size: 30px;
+        font-weight: bold;
+    }
+    a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+        background-color: #26b1e7;
+        border-radius: 10px;
+        color: white;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+}
+
+.contenedor_cart_productos{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.contenedor_cart_productos_producto{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100px;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    h5{
+        font-weight: bold;
+        color: #26b1e7;
+    }
+}
+
+.contenedor_cart_productos_producto_nombre{
+    width: 150px;
+}
+
+.contenedor_cart_productos_producto_cantidad{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    button{
+        color: #26b1e7;
+    }
+}
+
+.contenedor_cart_productos_producto_imagen{
+    width: 100px;
+    height: 100%;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        
+    }
+}
+.contenedor_cart_productos_producto_btnEliminarDeCarrito{
+    color: #AAAAAA;
+    transition: 0.2s;
+    &:hover{
+        transition: 0.2s;
+        transform: scale(1.1);
+        color: red;
+    }
+}
+
+.contenedor_cart_productos_producto_total{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);
+    height: 50px;
+    align-items: center;
+    padding: 0 20px;
+    border-radius: 10px;
+    .contenedor_cart_productos_producto_total--precio{
+        color: #26b1e7;
+        font-weight: bold;
+    }
+}
+
+
+.contenedor_cart_botonoes{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    a{
+        width: 30%;
+    }
+}
