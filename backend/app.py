@@ -201,7 +201,7 @@ def obtenerUsuarios():
         listaUsuarios.append(diccionarioUsuarios)
     
     return jsonify(listaUsuarios)
-
+  
 @app.route('/api/get/direcciones/<id>', methods=['GET'])
 
 def obtenerDirecciones(id):
@@ -239,6 +239,21 @@ def obtenerResenas(id_producto):
         productos_dict.append(producto_dict)
     
     return jsonify(productos_dict)
+  
+@app.route('/api/get/categorias', methods=['GET'])
+
+def obtenerCategorias():
+    conexion = ConexionBD()
+    resultado = conexion.select(f"SELECT * FROM public.categoria;") 
+    listaCategorias = []
+    for categoria in resultado:
+        diccionarioCategoria = {
+            'id_categoria': categoria[0],
+            'nombre': categoria[1],
+        }
+        listaCategorias.append(diccionarioCategoria)
+    
+    return jsonify(listaCategorias)
 
 @app.route('/api/get/usuarios/<id>', methods=['GET'])
 

@@ -35,6 +35,7 @@ import { ProductsUserProvider } from "./context/productsUser";
 import { ProductDetailProvider } from "./context/productDetail";
 import { ProductEditProvider } from "./context/productEdit";
 import { ProductReviewProvider } from "./context/productReview";
+import { CategoryProvider } from "./context/category";
 
 function App() {
   const { isLoggedIn } = useLoginAndLogout();
@@ -95,9 +96,7 @@ function App() {
                       />
                       <Route
                         path="/Tienda/VerificarCompra"
-                        element={
-                          isLoggedIn ? <Checkout /> : <Navigate to="/" />
-                        }
+                        element={isLoggedIn ? <Checkout /> : <Navigate to="/" />}
                       />
                       <Route
                         path="/Tienda/InformacionEnvio"
