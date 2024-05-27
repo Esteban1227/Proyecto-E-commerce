@@ -34,20 +34,20 @@ import { ProductProvider } from "./context/product";
 import { ProductsUserProvider } from "./context/productsUser";
 import { ProductDetailProvider } from "./context/productDetail";
 import { ProductEditProvider } from "./context/productEdit";
+import { ProductReviewProvider } from "./context/productReview";
 import { CategoryProvider } from "./context/category";
 
 function App() {
-
   const { isLoggedIn } = useLoginAndLogout();
 
   return (
     <Router>
       <ProductProvider>
-        <CategoryProvider>
-          <CartProvider>
-            <ProductsUserProvider>
-              <ProductDetailProvider>
-                <ProductEditProvider>
+        <CartProvider>
+          <ProductsUserProvider>
+            <ProductDetailProvider>
+              <ProductEditProvider>
+                <ProductReviewProvider>
                   <Layout>
                     <Routes>
                       <Route
@@ -56,9 +56,7 @@ function App() {
                           isLoggedIn ? (
                             <Navigate to="/Tienda" />
                           ) : (
-                            <FormLoginAndLogout
-
-                            />
+                            <FormLoginAndLogout />
                           )
                         }
                       />
@@ -67,9 +65,7 @@ function App() {
                         element={
                           isLoggedIn ? (
                             <>
-                              <Shop
-
-                              />
+                              <Shop />
                             </>
                           ) : (
                             <Navigate to="/" />
@@ -89,21 +85,13 @@ function App() {
                       <Route
                         path="/Tienda/DetalleProducto"
                         element={
-                          isLoggedIn ? (
-                            <ProductDetails />
-                          ) : (
-                            <Navigate to="/" />
-                          )
+                          isLoggedIn ? <ProductDetails /> : <Navigate to="/" />
                         }
                       />
                       <Route
                         path="/Tienda/EditarInforamcion"
                         element={
-                          isLoggedIn ? (
-                            <UserData />
-                          ) : (
-                            <Navigate to="/" />
-                          )
+                          isLoggedIn ? <UserData /> : <Navigate to="/" />
                         }
                       />
                       <Route
@@ -136,11 +124,11 @@ function App() {
                       />
                     </Routes>
                   </Layout>
-                </ProductEditProvider>
-              </ProductDetailProvider>
-            </ProductsUserProvider>
-          </CartProvider>
-        </CategoryProvider>
+                </ProductReviewProvider>
+              </ProductEditProvider>
+            </ProductDetailProvider>
+          </ProductsUserProvider>
+        </CartProvider>
       </ProductProvider>
     </Router>
   );

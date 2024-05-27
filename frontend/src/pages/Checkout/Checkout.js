@@ -41,7 +41,6 @@ export default function Checkout() {
     <main className="checkOut">
       <div className="container">
         <div className="row justify-content-center">
-          {/* Selected Image */}
           <div className="col-lg-6 order-lg-2 order-1">
             <div className="container_wizard">
               <div className="row">

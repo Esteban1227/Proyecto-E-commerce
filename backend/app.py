@@ -101,6 +101,23 @@ def CreateUser():
     else:
         return jsonify({'error': 'Se requiere todos los datos'}), 400
 
+@app.route('/api/post/CreateReview', methods=['POST'])
+
+def CreateReview():
+    datos = request.json
+    id_producto = datos.get('id_producto')
+    id_usuario = datos.get('id_usuario')
+    titulo = datos.get('titulo')
+    comentario = datos.get('comentario')
+    calificacion = datos.get('calificacion')
+    # Verificar si el usuario ya existe
+    if id_producto and id_usuario and titulo and comentario and calificacion:    
+        conexion = ConexionBD()
+        conexion.insert("INSERT INTO public.resena(id_prod, titulo, comentario, calificacion, id_usuario)VALUES (%s, %s,%s, %s,%s);",(id_producto, titulo, comentario, calificacion, id_usuario))
+        return jsonify({'status': '200'})
+    else:
+        return jsonify({'error': 'Se requiere todos los datos'}), 400
+
 @app.route('/api/post/login', methods=['POST'])
 
 def login():
@@ -184,7 +201,45 @@ def obtenerUsuarios():
         listaUsuarios.append(diccionarioUsuarios)
     
     return jsonify(listaUsuarios)
+  
+@app.route('/api/get/direcciones/<id>', methods=['GET'])
 
+def obtenerDirecciones(id):
+    conexion = ConexionBD()
+    resultado = conexion.select(f"SELECT * FROM public.direcciones WHERE id_usuario = '{id}';") 
+    direcciones_dict = []
+    for direccion in resultado:
+        producto_dict = {
+            'id': direccion[0],
+            'departamento': direccion[1],
+            'municipio': direccion[2],
+            'barrio': direccion[3],
+            'descripcion': direccion[4],
+            'direccion': direccion[5],
+            'telefono': direccion[6],
+            'id_usuario': direccion[7],
+        }
+        direcciones_dict.append(producto_dict)
+    
+    return jsonify(direcciones_dict)
+
+@app.route('/api/get/resenas/<id_producto>', methods=['GET'])
+
+def obtenerResenas(id_producto):
+    conexion = ConexionBD()
+    resultado = conexion.select(f"SELECT titulo, comentario, calificacion, public.usuarios.nombre FROM public.resena, public.usuarios WHERE public.resena.id_usuario = public.usuarios.id and public.resena.id_prod = {id_producto};") 
+    productos_dict = []
+    for producto in resultado:
+        producto_dict = {
+            'titulo': producto[0],
+            'comentario': producto[1],
+            'calificacion': producto[2],
+            'nombre': producto[3],
+        }
+        productos_dict.append(producto_dict)
+    
+    return jsonify(productos_dict)
+  
 @app.route('/api/get/categorias', methods=['GET'])
 
 def obtenerCategorias():

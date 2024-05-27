@@ -1,10 +1,18 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import { CiCirclePlus } from 'react-icons/ci';
+import { CiCirclePlus } from "react-icons/ci";
+import { FaRegSadTear } from "react-icons/fa";
 
 import "./ModalProductReviews.css";
+import { useProductReview } from "../../hooks/useProductReview";
 
-export default function ModalProductReviews( { modalComentarios, handleCloseModalComentarios, handleOpenModalCrearComentarios } ) {
+export default function ModalProductReviews({
+  modalComentarios,
+  handleCloseModalComentarios,
+  handleOpenModalCrearComentarios,
+}) {
+  const { productReview } = useProductReview();
+
   return (
     <Modal
       size="lg"
@@ -23,16 +31,25 @@ export default function ModalProductReviews( { modalComentarios, handleCloseModa
           >
             <CiCirclePlus size={"35px"} />
           </button>
-          <div className="modal_body_contendorComentarios_comentario">
-            <h6>Esteban Charria</h6>
-            <span>Basura producto</span>
-            <p>
-              El teléfono ha recibido elogios por su cámara de muy buena calidad
-              y su rendimiento general, satisfaciendo a los usuarios en aspectos
-              clave como la batería y la velocidad. Destaca por su relación
-              calidadprecio y las opciones de personalización del software.
-            </p>
-            <span>⭐⭐</span>
+          <div className="modal_body_contendorComentarios_contenedor">
+            {productReview.length === 0 ? (
+              <div className="modal_body_contendorComentarios_sinComentario">
+                <FaRegSadTear  size={"40px"} color="#26b1e7"/>
+                <h4>Este producto no tiene reseñas todavia</h4>
+                <span>Se el primero en dar tu opinar acerca de este producto</span>
+              </div>
+            ) : (
+              productReview.map((comment) => (
+                <div className="modal_body_contendorComentarios_comentario">
+                  <h6>{comment.nombre}</h6>
+                  <span>{comment.titulo}</span>
+                  <p>{comment.comentario}</p>
+                  {Array.from({ length: comment.calificacion }, (_, index) => (
+                    <span key={index}>⭐</span>
+                  ))}
+                </div>
+              ))
+            )}
           </div>
         </div>
       </Modal.Body>

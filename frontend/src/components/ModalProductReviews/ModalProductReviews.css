@@ -3,6 +3,22 @@
     flex-direction: column;
     gap: 10px;
 }
+.modal_body_contendorComentarios_sinComentario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    h4{
+        color: #26b1e7;
+    }
+}
+
+.modal_body_contendorComentarios_contenedor{
+    max-height: 500px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 
 .modal_body_contendorComentarios_comentario{
     box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.1);

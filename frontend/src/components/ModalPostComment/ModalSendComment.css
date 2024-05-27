@@ -4,3 +4,7 @@
 .modal_body_crearComentario_calificacion_input{
     display: none;
 }
+
+.modal_body_crearComentario_calificacion_label{
+    cursor: pointer;
+}
