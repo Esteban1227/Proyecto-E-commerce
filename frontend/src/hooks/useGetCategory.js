@@ -4,7 +4,7 @@ import { useContext, useEffect } from "react";
 import { CategoryContext } from "../context/category";
 
 
-export default function useGetCtegory() {
+export default function useGetCategory() {
     
   const { setCategories, categories } = useContext(CategoryContext)
 

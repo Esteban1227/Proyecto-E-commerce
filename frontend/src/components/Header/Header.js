@@ -2,12 +2,14 @@ import React, { useState, useEffect, useRef } from "react";
 import { BsCartFill } from "react-icons/bs";
 import { HiMiniSquaresPlus } from "react-icons/hi2";
 import { BiSolidUserCircle } from "react-icons/bi";
+import { FaSearch } from "react-icons/fa";
 import "./Header.css";
 import "animate.css";
 import { Link } from "react-router-dom";
 import CartMenu from "../CartMenu/CartMenu";
 import MenuUser from "../MenuUser/MenuUser";
 import logo from "../../assets/SEV-TECHNOLOGY.png";
+import { useSearch } from "../../hooks/useSearch";
 
 function Header() {
   const [openMenu, setOpenMenu] = useState(null); // Estado para rastrear el menú abierto
@@ -39,6 +41,8 @@ function Header() {
     setOpenMenu(openMenu === menu ? null : menu);
   };
 
+  const { setSearchTerm, searchTerm } = useSearch()
+
   return (
     <header className="header">
       <Link to={"/"} className="header_logo">
@@ -48,18 +52,12 @@ function Header() {
         <input
           type="text"
           className="header_buscador_input"
-          placeholder="Type your text"
+          placeholder="Buscar..."
+          value={searchTerm}
+          onChange={(event) => setSearchTerm(event.target.value)}
         />
-        <button className="header_buscador_button">
-          <svg
-            className="header_buscador_icono"
-            aria-hidden="true"
-            viewBox="0 0 24 24"
-          >
-            <g>
-              <path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path>
-            </g>
-          </svg>
+        <button className="header_buscador_icono">
+          <FaSearch className=""/>
         </button>
       </div>
       <div className="header_botones">

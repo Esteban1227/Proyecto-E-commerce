@@ -77,9 +77,10 @@
   }
   
   .header_buscador_icono {
-    height: 1.3em;
-    width: 1.3em;
-    fill: #b4b4b4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #a5a5a5;
   }
 
   .header_botones{

@@ -1,21 +1,35 @@
+//React
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+
+//CSS
 import "./Checkout.css";
+
+//Components
 import ButtonPrimary from "../../components/Button/ButtonPrimary";
 import ButtonSecundary from "../../components/Button/ButtonSecundary";
-import { IoReturnDownBackOutline } from "react-icons/io5";
 
+//Icons
+import { IoReturnDownBackOutline } from "react-icons/io5";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import { FaMapLocationDot, FaMoneyBills, FaLocationDot } from "react-icons/fa6";
 import { CiCirclePlus } from "react-icons/ci";
 import { FaPaypal } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import { MdEditSquare } from "react-icons/md";
+
+//hocks
 import { useCart } from "../../hooks/useCart";
+import { useAddresUser } from "../../hooks/useAddressUser";
+
+//ultils
 import { formatoPrecio } from "../../utils/formatoPrecio";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { toast } from "sonner";
 
 export default function Checkout() {
   const [currentStep, setCurrentStep] = useState(1);
+  const [checkInputAddress, setCheckInputAddress] = useState(false);
+  const [checkInputPaymentMethod, setCheckInputPaymentMethod] = useState(false);
 
   const handleNext = () => {
     setCurrentStep(currentStep + 1);
@@ -32,10 +46,11 @@ export default function Checkout() {
 
   const { cart } = useCart();
 
-  const totalCompra = 
-    cart.reduce((accumulator, currentValue) => {
-      return accumulator + currentValue.precio * currentValue.cantidad;
-    }, 0);
+  const totalCompra = cart.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.precio * currentValue.cantidad;
+  }, 0);
+
+  const { addressUser } = useAddresUser();
 
   return (
     <main className="checkOut">
@@ -138,33 +153,27 @@ export default function Checkout() {
                   >
                     <div className="contenedor_direccion_main">
                       <h3>Direccion de Envio:</h3>
-                      <div className="contenedor_direccion">
-                        <input
-                          className="contenedor_direccion_input"
-                          type="radio"
-                          id=""
-                          name="direccion"
-                        />
-                        {/* <img src="./ubicacion.jpg" alt="iconoUbicacion" /> */}
-                        <FaLocationDot size={"20px"} color="#26b1e7" />
-                        <div className="contenedor_direccion_informacion">
-                          <span>Calle 59 # 2bn 60 </span>
-                          <span>Cuidad</span>
-                        </div>
-                      </div>
-                      <div className="contenedor_direccion">
-                        <input
-                          className="contenedor_direccion_input"
-                          type="radio"
-                          id=""
-                          name="direccion"
-                        />
-                        {/* <img src="./ubicacion.jpg" alt="iconoUbicacion" /> */}
-                        <FaLocationDot size={"20px"} color="#26b1e7" />
-                        <div className="contenedor_direccion_informacion">
-                          <span>Calle 59 # 2bn 60 </span>
-                          <span>Cuidad</span>
-                        </div>
+                      <div className="contenedor_direccion_scroll">
+                        {addressUser.length !== 0 ? (
+                          addressUser.map((address) => (
+                            <div className="contenedor_direccion">
+                              <input
+                                className="contenedor_direccion_input"
+                                type="radio"
+                                id=""
+                                name="direccion"
+                                onChange={() => setCheckInputAddress(true)}
+                              />
+                              <FaLocationDot size={"20px"} color="#26b1e7" />
+                              <div className="contenedor_direccion_informacion">
+                                <span>{address.direccion}</span>
+                                <span>{address.municipio}</span>
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <div></div>
+                        )}
                       </div>
                       <Link
                         to={"/Tienda/InformacionEnvio"}
@@ -181,6 +190,7 @@ export default function Checkout() {
                         <IoReturnDownBackOutline />
                       </ButtonSecundary>
                       <ButtonPrimary
+                        disabled={!checkInputAddress}
                         onClick={handleNext}
                         className={"container_wizard_buttons_go"}
                       >
@@ -200,6 +210,7 @@ export default function Checkout() {
                           type="radio"
                           id=""
                           name="pago"
+                          onChange={() => setCheckInputPaymentMethod(true)}
                         />
                         {/* <img src="./bancolombia.jpg" alt="iconoUbicacion"> */}
                         <FaPaypal />
@@ -215,12 +226,6 @@ export default function Checkout() {
                       >
                         <IoReturnDownBackOutline />
                       </ButtonSecundary>
-                      <ButtonPrimary
-                        onClick={handleNext}
-                        className={"container_wizard_buttons_go"}
-                      >
-                        Continuar
-                      </ButtonPrimary>
                     </div>
                   </fieldset>
                 </form>
@@ -246,29 +251,38 @@ export default function Checkout() {
                     <li>{totalCompra}</li>
                   </ul>
                 </div>
-                
-                <PayPalScriptProvider options={{ clientId: "test", currency:"USD" }}>
-                  <PayPalButtons 
-                    style={{ layout: "horizontal" }} 
-                    createOrder={(data, actions) => {
-                      return actions.order.create({
-                        purchase_units:[
-                          {
-                            amount:{  
-                              value: totalCompra
-                            }
-                          }
-                        ]
-                      })
-                    }} 
-                    onApprove={async (data, actions) => {
-                      const order  = await actions.order?.capture()
-                      console.log(order)
+                <PayPalScriptProvider
+                  options={{ clientId: "test", currency: "USD" }}
+                >
+                  <div
+                    style={{
+                      display: checkInputPaymentMethod ? "block" : "none",
                     }}
-                    onCancel={async (data, actions) => {
-                      const order  = await actions.order?.capture()
-                      console.log(order)}}
-                  />
+                  >
+                    <PayPalButtons
+                      style={{ layout: "horizontal" }}
+                      createOrder={(data, actions) => {
+                        return actions.order.create({
+                          purchase_units: [
+                            {
+                              amount: {
+                                value: totalCompra,
+                              },
+                            },
+                          ],
+                        });
+                      }}
+                      onApprove={async (data, actions) => {
+                        toast.success("!Compra realizada con exito!");
+                      }}
+                      onCancel={async (data, actions) => {
+                        toast.warning("Compra cancelada");
+                      }}
+                      onError={async (data, actions) => {
+                        toast.error("Error a realizar la compra");
+                      }}
+                    />
+                  </div>
                 </PayPalScriptProvider>
               </div>
             </div>

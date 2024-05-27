@@ -4,7 +4,7 @@ import ButtonPrimary from "../../components/Button/ButtonPrimary";
 import { toast } from "sonner";
 import "./FormCreateProduct.css";
 import { useLoginAndLogout } from "../../hooks/useLoginAndLogout";
-import useGetCtegory from "../../hooks/useGetCategory";
+import useGetCategory from "../../hooks/useGetCategory";
 
 function FormCreateProduct() {
   const [previewSrc, setPreviewSrc] = useState(null); // Estado para almacenar la URL de la imagen previa
@@ -16,7 +16,7 @@ function FormCreateProduct() {
   const [descripcion, setDescripcion] = useState("");
   const [fileImg, setFileImg] = useState(null);
   const { userId } = useLoginAndLogout()
-  const { categories } = useGetCtegory()
+  const { categories } = useGetCategory()
  
   function clearForm() {
     const formCreateProduct = document.getElementById("form-createProduct");
@@ -30,7 +30,7 @@ function FormCreateProduct() {
       imgPreview.removeChild(imgPreview.firstChild);
     }
   }
-
+  
   // Función para manejar el envío del formulario
   async function handleSubmit(event) {
     event.preventDefault();
@@ -46,11 +46,6 @@ function FormCreateProduct() {
         idUsuario: userId,
         fileImg: fileImg,
       };
-
-      if (categoria==="Seleccione la categoria" || categoria===null){
-        toast.error("La categoria es obligatoria");
-        return
-      }
 
       const response = await axios.post(
         "http://127.0.0.1:5000/api/post/CreateProduct",
@@ -162,26 +157,13 @@ function FormCreateProduct() {
         <div className="contenedor_formulario_bloque">
           <label htmlFor="categoria">Categoría</label>
           <select required onChange={(event) => setCategoria(event.target.value)}>
-            <option>Seleccione la categoria</option>
-            {
-              console.log(categoria)
-            }
+            <option value={""}>Seleccione la categoria</option>
             {
               categories.map(category => (
-                 <option key={category.id}>{category.nombre}</option>
+                 <option value={category.nombre} key={category.id}>{category.nombre}</option>
               ))
             }
           </select>
-          {/* <input
-            className=""
-            type="text"
-            id="categoria"
-            name="categoria"
-            required
-            placeholder="Categoría del producto"
-            value={categoria}
-            onChange={(event) => setCategoria(event.target.value)}
-          /> */}
         </div>
 
         <div className="contenedor_formulario_bloque">
