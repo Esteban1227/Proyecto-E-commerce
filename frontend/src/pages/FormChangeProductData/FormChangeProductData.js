@@ -5,6 +5,7 @@ import { useProductEdit } from "../../hooks/useProductEdit";
 import { useLoginAndLogout } from "../../hooks/useLoginAndLogout";
 import { toast } from "sonner";
 import axios from "axios";
+import useGetCategory from "../../hooks/useGetCategory";
 
 export default function FormChangeProductData() {
   const { productEdit } = useProductEdit()
@@ -20,6 +21,7 @@ export default function FormChangeProductData() {
   const [fileImg, setFileImg] = useState(productEdit.img_producto);
   const { userId } = useLoginAndLogout()
   const [dataChange, setDataChange] = useState(false);
+  const { categories } = useGetCategory()
 
   
   function previewImage(event) {
@@ -64,7 +66,7 @@ export default function FormChangeProductData() {
       if (response.status === 200) {
         // Producto creado exitosamente, maneja el resultado según sea necesario
         // clearForm();
-
+        setDataChange(false)
         toast.success("Producto creado con exito");
       } else {
         // Maneja el caso de error
@@ -145,16 +147,14 @@ export default function FormChangeProductData() {
 
         <div className="contenedor_categoria_producto contenedor_formulario_bloque">
           <label htmlFor="categoria">Categoría</label>
-          <input
-            className="contenedor_categoria_producto_input contenedor_formulario_input"
-            type="text"
-            id="categoria"
-            name="categoria"
-            required
-            value={categoria}
-            onChange={(event) => {setCategoria(event.target.value); setDataChange(true)}}
-
-          />
+          <select required onChange={(event) => {setCategoria(event.target.value); setDataChange(true)}}>
+            <option value={categoria}>{categoria}</option>
+            {
+              categories.map(category => (
+                 <option value={category.nombre} key={category.id}>{category.nombre}</option>
+              ))
+            }
+          </select>
         </div>
 
         <div className="contenedor_descripcion_producto contenedor_formulario_bloque">
