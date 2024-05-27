@@ -1,5 +1,5 @@
 //React
-import React  from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -34,9 +34,9 @@ import { ProductProvider } from "./context/product";
 import { ProductsUserProvider } from "./context/productsUser";
 import { ProductDetailProvider } from "./context/productDetail";
 import { ProductEditProvider } from "./context/productEdit";
+import { ProductReviewProvider } from "./context/productReview";
 
 function App() {
-
   const { isLoggedIn } = useLoginAndLogout();
 
   return (
@@ -46,94 +46,86 @@ function App() {
           <ProductsUserProvider>
             <ProductDetailProvider>
               <ProductEditProvider>
-                <Layout>
-                  <Routes>
-                    <Route
-                      path="/"
-                      element={
-                        isLoggedIn ? (
-                          <Navigate to="/Tienda" />
-                        ) : (
-                          <FormLoginAndLogout
-                            
-                          />
-                        )
-                      }
-                    />
-                    <Route
-                      path="/Tienda"
-                      element={
-                        isLoggedIn ? (
-                          <>
-                            <Shop
-                              
-                            />
-                          </>
-                        ) : (
-                          <Navigate to="/" />
-                        )
-                      }
-                    />
-                    <Route
-                      path="/Tienda/CrearProducto"
-                      element={
-                        isLoggedIn ? (
-                          <FormCreateProduct />
-                        ) : (
-                          <Navigate to="/" />
-                        )
-                      }
-                    />
-                    <Route
-                      path="/Tienda/DetalleProducto"
-                      element={
-                        isLoggedIn ? (
-                          <ProductDetails />
-                        ) : (
-                          <Navigate to="/" />
-                        )
-                      }
-                    />
-                    <Route
-                      path="/Tienda/EditarInforamcion"
-                      element={
-                        isLoggedIn ? (
-                          <UserData />
-                        ) : (
-                          <Navigate to="/" />
-                        )
-                      }
-                    />
-                    <Route
-                      path="/Tienda/VerificarCompra"
-                      element={isLoggedIn ? <Checkout /> : <Navigate to="/" />}
-                    />
-                    <Route
-                      path="/Tienda/InformacionEnvio"
-                      element={
-                        isLoggedIn ? (
-                          <FormInformationShipping />
-                        ) : (
-                          <Navigate to="/" />
-                        )
-                      }
-                    />
-                    <Route
-                      path="/Tienda/EditarInformacionProudcto"
-                      element={
-                        isLoggedIn ? (
-                          <FormChangeProductData />
-                        ) : (
-                          <Navigate to="/" />
-                        )
-                      }
-                    />
-                    <Route
-                      path="/Tienda/Carrito"
-                      element={isLoggedIn ? <Cart /> : <Navigate to="/" />}
-                    />
-                  </Routes>
-                </Layout>
+                <ProductReviewProvider>
+                  <Layout>
+                    <Routes>
+                      <Route
+                        path="/"
+                        element={
+                          isLoggedIn ? (
+                            <Navigate to="/Tienda" />
+                          ) : (
+                            <FormLoginAndLogout />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/Tienda"
+                        element={
+                          isLoggedIn ? (
+                            <>
+                              <Shop />
+                            </>
+                          ) : (
+                            <Navigate to="/" />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/Tienda/CrearProducto"
+                        element={
+                          isLoggedIn ? (
+                            <FormCreateProduct />
+                          ) : (
+                            <Navigate to="/" />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/Tienda/DetalleProducto"
+                        element={
+                          isLoggedIn ? <ProductDetails /> : <Navigate to="/" />
+                        }
+                      />
+                      <Route
+                        path="/Tienda/EditarInforamcion"
+                        element={
+                          isLoggedIn ? <UserData /> : <Navigate to="/" />
+                        }
+                      />
+                      <Route
+                        path="/Tienda/VerificarCompra"
+                        element={
+                          isLoggedIn ? <Checkout /> : <Navigate to="/" />
+                        }
+                      />
+                      <Route
+                        path="/Tienda/InformacionEnvio"
+                        element={
+                          isLoggedIn ? (
+                            <FormInformationShipping />
+                          ) : (
+                            <Navigate to="/" />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/Tienda/EditarInformacionProudcto"
+                        element={
+                          isLoggedIn ? (
+                            <FormChangeProductData />
+                          ) : (
+                            <Navigate to="/" />
+                          )
+                        }
+                      />
+                      <Route
+                        path="/Tienda/Carrito"
+                        element={isLoggedIn ? <Cart /> : <Navigate to="/" />}
+                      />
+                    </Routes>
+                  </Layout>
+                </ProductReviewProvider>
               </ProductEditProvider>
             </ProductDetailProvider>
           </ProductsUserProvider>

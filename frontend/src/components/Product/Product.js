@@ -6,9 +6,12 @@ import { Link } from "react-router-dom";
 import { useCart } from "../../hooks/useCart";
 import { useProductDetail } from "../../hooks/useProductDetail";
 import { formatoPrecio } from "../../utils/formatoPrecio";
+import { useProductReview } from "../../hooks/useProductReview";
 
 function Product({ producto }) {
   const { setProductDetail } = useProductDetail();
+
+  const { setProductReviewId } = useProductReview()
 
   const { addCart, cart, removeFromCart } = useCart();
 
@@ -27,7 +30,7 @@ function Product({ producto }) {
         <Link
           className="contenedor_producto_informacion_nombre"
           to={"DetalleProducto"}
-          onClick={() => setProductDetail(producto)}
+          onClick={() => {setProductDetail(producto); setProductReviewId(producto.id)}}
         >
           {producto.nombre.toUpperCase()}
         </Link>

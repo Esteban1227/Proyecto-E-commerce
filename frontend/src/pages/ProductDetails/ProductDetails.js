@@ -15,13 +15,16 @@ import { useCart } from '../../hooks/useCart';
 import ButtonSecundary from '../../components/Button/ButtonSecundary';
 import { useProductDetail } from '../../hooks/useProductDetail';
 import { formatoPrecio } from '../../utils/formatoPrecio';
+import { useProductReview } from '../../hooks/useProductReview';
 
 export const ProductDetails = () => {
 
+    
+    
     const [modalComentarios, setModalComentarios] = useState(false);
-
+    
     const [modalCrearComentario, setModalCrearComentario] = useState(false);
-
+    
     const handleCloseModalComentarios = () => {
         setModalComentarios(false)
     }
@@ -37,10 +40,12 @@ export const ProductDetails = () => {
         setModalComentarios(false)
     }
 
+    
     const { productDetail } = useProductDetail()
-
+    
     const { cart, removeFromCart, addCart, diminishCart } = useCart();
 
+    
     const inCart = cart.some((item) => item.id === productDetail.id);
 
     return (
