@@ -3,14 +3,15 @@ import { useContext, useEffect } from "react";
 import { AddressUserContext } from "../context/addressUser";
 
 import { useLoginAndLogout } from "./useLoginAndLogout"
+
 import axios from "axios";
 
 export const useAddresUser = () => {
-  const { setAddressUser, address } = useContext(AddressUserContext);
+  const { setAddressUser, addressUser } = useContext(AddressUserContext);
 
   const { userId } = useLoginAndLogout()
 
-  const fetchProductReviews = async () => {
+  const fetchAddressUser = async () => {
     try {
       const response = await axios.get(
         `http://127.0.0.1:5000/api/get/direcciones/${userId}`
@@ -26,11 +27,11 @@ export const useAddresUser = () => {
   };
 
   useEffect(() => {
-    fetchProductReviews();
-  }, [address]);
+    fetchAddressUser();
+  }, []);
 
   return {
     setAddressUser,
-    address
+    addressUser
   };
 };

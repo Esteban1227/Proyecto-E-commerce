@@ -110,13 +110,25 @@ def CreateReview():
     titulo = datos.get('titulo')
     comentario = datos.get('comentario')
     calificacion = datos.get('calificacion')
-    # Verificar si el usuario ya existe
-    if id_producto and id_usuario and titulo and comentario and calificacion:    
-        conexion = ConexionBD()
-        conexion.insert("INSERT INTO public.resena(id_prod, titulo, comentario, calificacion, id_usuario)VALUES (%s, %s,%s, %s,%s);",(id_producto, titulo, comentario, calificacion, id_usuario))
-        return jsonify({'status': '200'})
-    else:
-        return jsonify({'error': 'Se requiere todos los datos'}), 400
+    conexion = ConexionBD()
+    conexion.insert("INSERT INTO public.resena(id_prod, titulo, comentario, calificacion, id_usuario)VALUES (%s, %s,%s, %s,%s);",(id_producto, titulo, comentario, calificacion, id_usuario))
+    return jsonify({'status': '200'})
+
+
+@app.route('/api/post/CreateAddress', methods=['POST'])
+
+def CreateAddress():
+    datos = request.json
+    departamento = datos.get('departamento')
+    municipio = datos.get('municipio')
+    barrio = datos.get('barrio')
+    descripcion = datos.get('descripcion')
+    direccion = datos.get('direccion')
+    telefono = datos.get('telefono')
+    id_usuario = datos.get('idUsuario')
+    conexion = ConexionBD()
+    conexion.insert("INSERT INTO public.direcciones(departamento, municipio, barrio, descripcion, direccion, telefono, id_usuario) VALUES (%s, %s,%s, %s,%s,%s,%s);",(departamento, municipio, barrio, descripcion, direccion,telefono, id_usuario))
+    return jsonify({'status': '200'})
 
 @app.route('/api/post/login', methods=['POST'])
 
@@ -248,8 +260,7 @@ def obtenerCategorias():
     listaCategorias = []
     for categoria in resultado:
         diccionarioCategoria = {
-            'id_categoria': categoria[0],
-            'nombre': categoria[1],
+            'nombre': categoria[0],
         }
         listaCategorias.append(diccionarioCategoria)
     

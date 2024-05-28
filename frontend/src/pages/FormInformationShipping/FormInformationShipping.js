@@ -1,26 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import ButtonPrimary from "../../components/Button/ButtonPrimary";
 import "./FormInformationShipping.css";
+import { toast } from "sonner";
+import { useLoginAndLogout } from "../../hooks/useLoginAndLogout";
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 export default function FormInformationShipping() {
+  const [departamento, setDepartamento] = useState("");
+  const [municipio, setMunicipio] = useState("");
+  const [barrio, setBarrio] = useState("");
+  const [direccion, setDireccion] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const { userId } = useLoginAndLogout();
+  const navigate = useNavigate();
+
+  // Función para manejar el envío del formulario
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    try {
+      const formData = {
+        departamento: departamento,
+        municipio: municipio,
+        barrio: barrio,
+        direccion: direccion,
+        descripcion: descripcion,
+        telefono: telefono,
+        idUsuario: userId,
+      };
+
+      const response = await axios.post(
+        "http://127.0.0.1:5000/api/post/CreateAddress",
+        formData
+      );
+
+      // Verificar si la creación del producto fue exitosa
+      if (response.status === 200) {
+        toast.success("Producto creado con exito");
+        navigate(-1);
+      } else {
+        // Maneja el caso de error
+        toast.error("No se a podido crear el producto " + response.status);
+      }
+    } catch (error) {
+      toast.error("No se a podido crear el producto" + error);
+    }
+  }
+
   return (
     <section className="contenedor_principal formulario">
       <div className="line">
         <h2> Informacion Domicilio</h2>
       </div>
       <form
-        className="contenedor_formulario contenedor_formulario_crearProducto"
-        enctype="multipart/form-data"
-        id="crearProducto"
-        action="/registroProducto"
+        className="contenedor_formulario"
         method="POST"
+        onSubmit={handleSubmit}
       >
         <div className="contenedor_departamento contenedor_formulario_bloque">
           <label for="departamento">Departamento</label>
           <select
-            className="contenedor_formulario_bloque_select"
-            id="departamento"
-            name="departamento"
+            onChange={(event) => setDepartamento(event.target.value)}
             required
           >
             <option value="">Selecciona tu departamento</option>
@@ -70,6 +112,7 @@ export default function FormInformationShipping() {
             name="municipio"
             required
             placeholder="Cali"
+            onChange={(event) => setMunicipio(event.target.value)}
           />
         </div>
 
@@ -81,6 +124,7 @@ export default function FormInformationShipping() {
             id="barrio"
             name="barrio"
             required
+            onChange={(event) => setBarrio(event.target.value)}
             placeholder="Alamos"
           />
         </div>
@@ -93,6 +137,7 @@ export default function FormInformationShipping() {
             id="direccion"
             name="direccion"
             required
+            onChange={(event) => setDireccion(event.target.value)}
             placeholder="Calle 59 # 2an 36"
           />
         </div>
@@ -105,6 +150,7 @@ export default function FormInformationShipping() {
             id="descripcion"
             name="descripcion"
             required
+            onChange={(event) => setDescripcion(event.target.value)}
             placeholder="Casa - apartamento - numero de apartamento - nombre de unidad"
           />
         </div>
@@ -117,11 +163,12 @@ export default function FormInformationShipping() {
             id="telefono"
             name="telefono"
             required
+            onChange={(event) => setTelefono(event.target.value)}
             placeholder="3167882033"
           />
         </div>
 
-          <ButtonPrimary>Guardar</ButtonPrimary>
+        <ButtonPrimary type={"submit"}>Crear Direccion</ButtonPrimary>
       </form>
     </section>
   );
