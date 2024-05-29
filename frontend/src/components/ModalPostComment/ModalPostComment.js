@@ -85,6 +85,7 @@ export default function ModalPostComment({
               type="text"
               value={titulo}
               onChange={(event) => setTitulo(event.target.value)}
+              required
             />
           </div>
           <div className="contenedor_formulario_bloque">
@@ -92,6 +93,7 @@ export default function ModalPostComment({
             <textarea
               value={comentario}
               onChange={(event) => setComentario(event.target.value)}
+              required
             />
           </div>
           <div className="modal_body_calificacion">
