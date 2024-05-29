@@ -67,13 +67,13 @@ export default function FormChangeProductData() {
         // Producto creado exitosamente, maneja el resultado según sea necesario
         // clearForm();
         setDataChange(false)
-        toast.success("Producto creado con exito");
+        toast.success("El producto fue actualizado con exito");
       } else {
         // Maneja el caso de error
-        toast.error("No se a podido crear el producto " + response.status);
+        toast.error("No se a podido actualizar el producto");
       }
     } catch (error) {
-      toast.error("No se a podido crear el producto" + error);
+      toast.error("No se a podido actualizar el producto");
     }
   }
 

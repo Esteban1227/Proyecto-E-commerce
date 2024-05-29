@@ -38,14 +38,14 @@ export default function FormInformationShipping() {
 
       // Verificar si la creación del producto fue exitosa
       if (response.status === 200) {
-        toast.success("Producto creado con exito");
+        toast.success("Direccion creada con exito");
         navigate(-1);
       } else {
         // Maneja el caso de error
-        toast.error("No se a podido crear el producto " + response.status);
+        toast.error("No se a podido crear la direccion");
       }
     } catch (error) {
-      toast.error("No se a podido crear el producto" + error);
+      toast.error("No se a podido crear la direccion");
     }
   }
 

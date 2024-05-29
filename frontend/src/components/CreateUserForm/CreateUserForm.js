@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import ButtonPrimary from '../Button/ButtonPrimary';
 import { useLoginAndLogout } from '../../hooks/useLoginAndLogout';
+import { toast } from "sonner";
 
 function CreateUserForm() {
     const [id, setId] = useState('');
@@ -41,14 +42,13 @@ function CreateUserForm() {
             localStorage.setItem('access_token', data.access_token);
             // Llama a la función onLogin para actualizar el estado de autenticación en el componente principal
             handleSimpleLogin(id);
+            toast.success("¡Usuario registrado con exito!");
           }
         } else {
-          const data = response.data;
-          setError(data.error);
+          toast.error("El usuario no pudo ser registrado");
         }
       } catch (error) {
-        console.error('Error al crear usuario:', error);
-        alert('Error al crear usuario. Por favor, inténtalo de nuevo.');
+        toast.error("Error al crear usuario. Por favor, inténtalo de nuevo.");
       }
     }
   

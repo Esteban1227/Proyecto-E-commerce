@@ -36,3 +36,13 @@
     color: #26b1e7;
     font-weight: bold;
 }
+
+.contenedor_productosUser_noProduct{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    a{
+        color: #26b1e7;
+    }
+}

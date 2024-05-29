@@ -58,13 +58,13 @@ export default function ModalPostComment({
       if (response.status === 200) {
         await fetchProductReviews();
         resetForm()
-        toast.success("Producto creado con exito");
+        toast.success("Se publico el comentario con exito");
       } else {
         // Maneja el caso de error
-        toast.error("No se a podido crear el producto " + response.status);
+        toast.error("No se a podido publicar el comentario");
       }
     } catch (error) {
-      toast.error("No se a podido crear el producto" + error);
+      toast.error("No se a podido publicar el comentario");
     }
   }
 
